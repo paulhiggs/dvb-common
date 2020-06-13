@@ -1,0 +1,33 @@
+const PAGINATION_PREFIX = "urn:fvc:metadata:cs:HowRelatedCS:2015-12:pagination:";
+const CRID_NOW_NEXT_PREFIX = "crid://dvb.org/metadata/schedules/now-next/";
+
+module.exports = Object.freeze({
+    MAX_TITLE_LENGTH: 80,
+    MAX_KEYWORD_LENGTH: 32,
+	MAX_ORGANIZATION_NAME_LENGTH: 32,
+	MAX_NAME_PART_LENGTH: 32,
+	MAX_EXPLANATORY_TEXT_LENGTH: 160,
+	
+	SYNOPSIS_SHORT_LABEL: "short",
+	SYNOPSIS_SHORT_LENGTH: 90,
+	
+    SYNOPSIS_MEDIUM_LABEL: "medium", 
+    SYNOPSIS_MEDIUM_LENGTH: 250, 
+	
+    SYNOPSIS_LONG_LABEL: "long",
+	SYNOPSIS_LONG_LENGTH: 1200, 
+	
+	TEMPLATE_AIT_CONTENT_TYPE: "application/vnd.dvb.ait+xml",
+    TEMPLATE_AIT_URI: "urn:fvc:metadata:cs:HowRelatedCS:2018:templateAIT",
+    
+	PAGINATION_FIRST_URI: PAGINATION_PREFIX+"first",
+	PAGINATION_PREV_URI: PAGINATION_PREFIX+"prev",
+	PAGINATION_NEXT_URI: PAGINATION_PREFIX+"next",
+	PAGINATION_LAST_URI : PAGINATION_PREFIX+"last",
+	  
+	CRID_NOW: CRID_NOW_NEXT_PREFIX+"now",
+	CRID_LATER: CRID_NOW_NEXT_PREFIX+"later",
+	CRID_EARLIER: CRID_NOW_NEXT_PREFIX+"earlier", 
+	
+	PROMOTIONAL_STILL_IMAGE_URI: "urn:tva:metadata:cs:HowRelatedCS:2012:19"
+});
