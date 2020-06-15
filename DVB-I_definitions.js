@@ -78,5 +78,5 @@ module.exports = Object.freeze({
     CONTENT_TYPE_DVB_PLAYLIST: "application/xml",     // XML Playlist
 	
 	
-	__zzzENDzzz__: 0
+	__zzzENDzzz__: null
 });
