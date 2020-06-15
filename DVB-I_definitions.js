@@ -29,7 +29,6 @@ module.exports = Object.freeze({
 	SYNOPSIS_LONG_LENGTH: 1200, 
 	
 	XML_AIT_CONTENT_TYPE: "application/vnd.dvb.ait+xml",
-	TEMPLATE_AIT_CONTENT_TYPE: this.XML_AIT_CONTENT_TYPE,
     TEMPLATE_AIT_URI: "urn:fvc:metadata:cs:HowRelatedCS:2018:templateAIT",
     
 	PAGINATION_FIRST_URI: PAGINATION_PREFIX+"first",
