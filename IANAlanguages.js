@@ -9,6 +9,26 @@ const fs = require("fs");
  * @param {String} languagesData the text of the language data
  */
 function loadLanguages(languageData) {
+	
+	/**
+	 * determines if a value is in a set of values - simular to 
+	 *
+	 * @param {String or Array} values The set of values to check existance in
+	 * @param {String} value The value to check for existance
+	 * @return {boolean} if value is in the set of values
+	 */
+	function isIn(values, value){
+		if (typeof(values) == "string")
+			return values==value;
+		
+		if (typeof(values) == "object") {
+			for (var x=0; x<values.length; x++) 
+				if (values[x] == value)
+					return true;
+		}
+		return false;
+	}
+	
 	var entries = languageData.split("%%");
 	entries.forEach(entry => {
 		var i=0, items=entry.split("\n");
