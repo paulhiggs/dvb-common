@@ -25,10 +25,19 @@ function loadCountries(countryData) {
 
 
 module.exports = class ISOcountries {
-
-	countriesList=[];
-	constructor() {
+	
+	
+	/**
+	 * constructor
+	 *
+	 * @param {boolean} use2 allow the 2 digit country codes to be searched
+	 * @param {boolean} use3 allow the 3 digit country codes to be searched
+	 */
+	constructor(use2=true, use3=false) {
 		loadCountries.bind(this);
+		this.countriesList=[];
+		this.use2CharCountries=use2;
+		this.use3CharCountries=use3;
 	}
 	
 	/**
@@ -36,8 +45,9 @@ module.exports = class ISOcountries {
 	 *
 	 * @param {String} countriesFile the file name to load
 	 */
-	loadCountriesFromFile = function(countriesFile) {
+	loadCountriesFromFile = function(countriesFile, purge=false) {
 		console.log("reading countries from", countriesFile);
+		if (purge) this.reset();
 		fs.readFile(countriesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
 				loadCountries(data);
@@ -52,8 +62,9 @@ module.exports = class ISOcountries {
 	 *
 	 * @param {String} countriesURL the URL to the file to load
 	 */
-	loadCountriesFromURL = function(countriesURL) {
+	loadCountriesFromURL = function(countriesURL, purge=false) {
 		console.log("retrieving countries from", countriesURL);
+		if (purge) this.reset();
 		var xhttp = new XmlHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
@@ -78,13 +89,30 @@ module.exports = class ISOcountries {
 	 * @return {boolean} true if countryCode is known else false
 	 */
 	isISO3166code = function(countryCode) {
-		if (countryCode.length!=3) {
-			return false;
-		}
 		var found=false;
-		countriesList.forEach(country => {
-			if (countryCode==country.alpha3) found=true;
-		});
+		
+		if (this.use3CharCountries && countryCode.length==3) {
+			var i=0;
+			while (!found && i < countriesList.length) {
+				if (countryCode==countriesList[i].alpha3)
+					found=true;
+				i++;
+			}
+//			countriesList.forEach(country => {
+//				if (countryCode==country.alpha3) found=true;
+//			});
+		}
+		else if (this.use2CharCountries && countryCode.length==2) {
+			var i=0;
+			while (!found && i < countriesList.length) {
+				if (countryCode==countriesList[i].alpha2)
+					found=true;
+				i++;
+			}				
+//			countriesList.forEach(country => {
+//				if (countryCode==country.alpha3) found=true;
+//			});
+		}
 		return found;
 	}
 }
