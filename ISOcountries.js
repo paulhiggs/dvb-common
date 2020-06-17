@@ -54,7 +54,7 @@ module.exports = class ISOcountries {
 			} else {
 				console.log(err);
 			}
-		});
+		}.bind(this));
 	}
 	
 	/**
@@ -65,13 +65,14 @@ module.exports = class ISOcountries {
 	loadCountriesFromURL = function(countriesURL, purge=false) {
 		console.log("retrieving countries from", countriesURL);
 		if (purge) this.reset();
+		const loader=this.loadCountries.bind(this);
 		var xhttp = new XmlHttpRequest();
 		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4) {
-				if (this.status == 200) {
-					loadCountries(xhttp.responseText);
+			if (xhttp.readyState == 4) {
+				if (xhttp.status == 200) {
+					loader(xhttp.responseText);
 				}
-				else console.log("error ("+this.status+") retrieving "+countriesURL);	
+				else console.log("error ("+xhttp.status+") retrieving "+countriesURL);	
 			}
 		};
 		xhttp.open("GET", countriesURL, true);
