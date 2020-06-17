@@ -78,17 +78,17 @@ module.exports = Object.freeze({
     CONTENT_TYPE_DVB_PLAYLIST: "application/xml",     // XML Playlist
 
 // A177 6.11.11 - Restart Availability
-    RESTART_AVAILBLE="urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_available",
-	RESTART_CHECK="urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_check",
-	RESTART_PENDING="urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_pending",
+    RESTART_AVAILBLE: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_available",
+	RESTART_CHECK: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_check",
+	RESTART_PENDING: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_pending",
 	
 // A177 6.11.6 - Media Availability
-	MEDIA_AVAILABLE="urn:fvc:metadata:cs:MediaAvailabilityCS:2014-07:media_available",
-	MEDIA_UNAVAILABLE="urn:fvc:metadata:cs:MediaAvailabilityCS:2014-07:media_unavailable",
+	MEDIA_AVAILABLE: "urn:fvc:metadata:cs:MediaAvailabilityCS:2014-07:media_available",
+	MEDIA_UNAVAILABLE: "urn:fvc:metadata:cs:MediaAvailabilityCS:2014-07:media_unavailable",
 
 // A177 6.11.7 - Forward EPG Availability
-	FORWARD_EPG_AVAILABLE="urn:fvc:metadata:cs:FEPGAvailabilityCS:2014-10:fepg_available",
-	FORWARD_EPG_UNAVAILABLE="urn:fvc:metadata:cs:FEPGAvailabilityCS:2014-10:fepg_unavailable",
+	FORWARD_EPG_AVAILABLE: "urn:fvc:metadata:cs:FEPGAvailabilityCS:2014-10:fepg_available",
+	FORWARD_EPG_UNAVAILABLE: "urn:fvc:metadata:cs:FEPGAvailabilityCS:2014-10:fepg_unavailable",
 
 	
 	__zzzENDzzz__: null
