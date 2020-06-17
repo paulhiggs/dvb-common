@@ -45,7 +45,7 @@ function loadLanguages(languageData) {
 
 
 
-module.exports = class ISOcountries {
+module.exports = class IANAlanguages {
 
 	/**
 	 * constructor
