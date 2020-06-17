@@ -1,61 +1,57 @@
-
 const XmlHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fs = require("fs");
 
-/**
- * load the languages into knownLanguages global array from the specified text
- * file is formatted according to www.iana.org/assignments/language-subtag-registry/language-subtag-registry
- *
- * @param {String} languagesData the text of the language data
- */
-function loadLanguages(languageData) {
-	
-	/**
-	 * determines if a value is in a set of values - simular to 
-	 *
-	 * @param {String or Array} values The set of values to check existance in
-	 * @param {String} value The value to check for existance
-	 * @return {boolean} if value is in the set of values
-	 */
-	function isIn(values, value){
-		if (typeof(values) == "string")
-			return values==value;
-		
-		if (typeof(values) == "object") {
-			for (var x=0; x<values.length; x++) 
-				if (values[x] == value)
-					return true;
-		}
-		return false;
-	}
-	
-	var entries = languageData.split("%%");
-	entries.forEach(entry => {
-		var i=0, items=entry.split("\n");
-		if (isIn(items,"Type: language") || isIn(items,"Type: extlang")) {
-			//found one
-			for (i=0; i<items.length; i++) {
-				if (items[i].startsWith("Subtag:")) {
-					this.languagesList.push(items[i].split(":")[1].trim());
-				}
-			}
-		}
-	});
-}
+class IANAlanguages {
 
-
-
-module.exports = class IANAlanguages {
-
+	languagesList=[];
 	/**
 	 * constructor
 	 *
 	 */
-	constructor(use2=true, use3=false) {
-		loadLanguages.bind(this);
+	constructor() {
 		this.languagesList=[];
 	}
 
+	empty() {
+		this.languagesList=[];
+	}
+
+	/**
+	 * load the languages into knownLanguages global array from the specified text
+	 * file is formatted according to www.iana.org/assignments/language-subtag-registry/language-subtag-registry
+	 *
+	 * @param {String} languagesData the text of the language data
+	 */
+	/*private function*/ loadLanguages(languageData) {
+	
+		/**
+		 * determines if a value is in a set of values - simular to 
+		 *
+		 * @param {String or Array} values The set of values to check existance in
+		 * @param {String} value The value to check for existance
+		 * @return {boolean} if value is in the set of values
+		 */
+		function isIn(values, value){
+			if (typeof(values) == "string")
+				return values==value;
+			
+			if (typeof(values) == "object") 
+				for (var x=0; x<values.length; x++) 
+					if (values[x] == value)
+						return true;
+
+			return false;
+		}
+		
+		var entries = languageData.split("%%");
+		entries.forEach(entry => {
+			var items=entry.replace(/(\r|\t)/gm,"").split("\n");
+			if (isIn(items,"Type: language") || isIn(items,"Type: extlang")) 
+				for (var i=0; i<items.length; i++) 
+					if (items[i].startsWith("Subtag:")) 
+						this.languagesList.push(items[i].split(":")[1].trim());
+		});
+	}
 
 	/**
 	 * load the languages list into the knownLanguages global array from the specified file
@@ -63,14 +59,16 @@ module.exports = class IANAlanguages {
 	 *
 	 * @param {String} languagesFile the file name to load
 	 */
-	loadLanguagesFromFile = function(languagesFile, purge=false) {
+	loadLanguagesFromFile(languagesFile, purge=false) {
 		console.log("reading languages from", languagesFile);
-		if (purge) this.reset();
+		if (purge) this.empty();
+
 		fs.readFile(languagesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
-				loadLanguages(data);
+				this.loadLanguages(data);		
 			}
-		});
+			else console.log("error loading languages")
+		}.bind(this));
 	}
 
 	/**
@@ -78,25 +76,24 @@ module.exports = class IANAlanguages {
 	 *
 	 * @param {String} languagesURL the URL to load
 	 */
-	loadLanguagesFromURL = function(languagesURL, purge=false) {
+	loadLanguagesFromURL(languagesURL, purge=false) {
 		console.log("retrieving languages from", languagesURL);
-		if (purge) this.reset();
+		if (purge) this.empty();
+		const loader=this.loadLanguages.bind(this);
 		var xhttp = new XmlHttpRequest();
 		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4) {
-				if (this.status == 200) {
-					loadLanguages(xhttp.responseText);
+			if (xhttp.readyState == 4) {
+				if (xhttp.status == 200) {
+					loader(xhttp.responseText);
+
 				}
-				else console.log("error ("+this.status+") retrieving "+languagesURL);	
+				else console.log("error ("+xhttp.status+") retrieving "+languagesURL);	
 			}
 		};
 		xhttp.open("GET", languagesURL, true);
 		xhttp.send();
 	}
 
-	reset() {
-		this.languagesList.length=0;
-	}
 	
 	/**
 	 * determines if a language is known 
@@ -104,7 +101,7 @@ module.exports = class IANAlanguages {
 	 * @param {String} value The value to check for existance
 	 * @return {boolean} true if value is a known language, else false
 	 */
-	isKnown = function(value){
+	isKnown(value){
 		if (typeof(this.languagesList) == "string")
 			return this.languagesList==value;
 		
@@ -116,3 +113,5 @@ module.exports = class IANAlanguages {
 		return false;
 	}	
 }
+
+module.exports = IANAlanguages;
