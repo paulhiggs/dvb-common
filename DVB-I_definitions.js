@@ -47,7 +47,7 @@ module.exports = Object.freeze({
     JPEG_IMAGE_CS_VALUE: FILE_FORMAT_CS+":1",
     PNG_IMAGE_CS_VALUE: FILE_FORMAT_CS+":15",	
 
-// A177 table 15
+// A177v1 only table 15 - deprecated in A177v2
     DVBT_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-t",
     DVBS_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-s",
     DVBC_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-c",
@@ -55,33 +55,15 @@ module.exports = Object.freeze({
     DVBDASH_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-dash",
     DVBAPPLICATION_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":application",
 
-// A177 7.3.2
-    APP_IN_PARALLEL: LINKED_APLICATION_CS+":1.1",
-    APP_IN_CONTROL: LINKED_APLICATION_CS+":1.2",
-    APP_OUTSIDE_AVAILABILITY: LINKED_APLICATION_CS+":2",
-
-// A177 7.3.1
-    BANNER_OUTSIDE_AVAILABILITY_v1: DVB_RELATED_CS_v1+":1000.1",
-    LOGO_SERVICE_LIST_v1: DVB_RELATED_CS_v1+":1001.1",
-    LOGO_SERVICE_v1: DVB_RELATED_CS_v1+":1001.2",
-    LOGO_CG_PROVIDER_v1: DVB_RELATED_CS_v1+":1002.1",
-
-// A177 7.3.1
-    BANNER_OUTSIDE_AVAILABILITY_v2: DVB_RELATED_CS_v2+":1000.1",
-	BANNER_CONTENT_FINISHED_v2: DVB_RELATED_CS_v2+":1000.2",	// added in A177v2
-    LOGO_SERVICE_LIST_v2: DVB_RELATED_CS_v2+":1001.1",
-    LOGO_SERVICE_v2: DVB_RELATED_CS_v2+":1001.2",
-    LOGO_CG_PROVIDER_v2: DVB_RELATED_CS_v2+":1002.1",
-
 // A177 5.2.7.2
     CONTENT_TYPE_DASH_MPD: "application/dash+xml",    // MPD of linear service
     CONTENT_TYPE_DVB_PLAYLIST: "application/xml",     // XML Playlist
 
-// A177 6.11.11 - Restart Availability
-    RESTART_AVAILBLE: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_available",
-	RESTART_CHECK: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_check",
-	RESTART_PENDING: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_pending",
-	
+// A177 6.11.3 - Caption Coding Format
+	DVB_BITMAP_SUBTITLES: "urn:tva:metadata:cs:CaptionCodingFormatCS:2015:2.1",
+	DVB_CHARACTER_SUBTITLES: "urn:tva:metadata:cs:CaptionCodingFormatCS:2015:2.2",
+	EBU_TT_D: "urn:tva:metadata:cs:CaptionCodingFormatCS:2015:3.2",
+
 // A177 6.11.6 - Media Availability
 	MEDIA_AVAILABLE: "urn:fvc:metadata:cs:MediaAvailabilityCS:2014-07:media_available",
 	MEDIA_UNAVAILABLE: "urn:fvc:metadata:cs:MediaAvailabilityCS:2014-07:media_unavailable",
@@ -90,6 +72,32 @@ module.exports = Object.freeze({
 	FORWARD_EPG_AVAILABLE: "urn:fvc:metadata:cs:FEPGAvailabilityCS:2014-10:fepg_available",
 	FORWARD_EPG_UNAVAILABLE: "urn:fvc:metadata:cs:FEPGAvailabilityCS:2014-10:fepg_unavailable",
 
+// A177 6.11.11 - Restart Availability
+    RESTART_AVAILBLE: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_available",
+	RESTART_CHECK: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_check",
+	RESTART_PENDING: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_pending",
+
+// A177v1 7.3.1
+    BANNER_OUTSIDE_AVAILABILITY_v1: DVB_RELATED_CS_v1+":1000.1",
+    LOGO_SERVICE_LIST_v1: DVB_RELATED_CS_v1+":1001.1",
+    LOGO_SERVICE_v1: DVB_RELATED_CS_v1+":1001.2",
+    LOGO_CG_PROVIDER_v1: DVB_RELATED_CS_v1+":1002.1",
+
+// A177v2 7.3.1
+    BANNER_OUTSIDE_AVAILABILITY_v2: DVB_RELATED_CS_v2+":1000.1",
+	BANNER_CONTENT_FINISHED_v2: DVB_RELATED_CS_v2+":1000.2",	// added in A177v2
+    LOGO_SERVICE_LIST_v2: DVB_RELATED_CS_v2+":1001.1",
+    LOGO_SERVICE_v2: DVB_RELATED_CS_v2+":1001.2",
+    LOGO_CG_PROVIDER_v2: DVB_RELATED_CS_v2+":1002.1",
+
+// A177 7.3.2
+    APP_IN_PARALLEL: LINKED_APLICATION_CS+":1.1",
+    APP_IN_CONTROL: LINKED_APLICATION_CS+":1.2",
+    APP_OUTSIDE_AVAILABILITY: LINKED_APLICATION_CS+":2",
+
+
 	
+
+
 	__zzzENDzzz__: null
 });
