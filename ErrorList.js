@@ -5,6 +5,8 @@
 module.exports = class ErrorList {
     counts=[]; messages=[]; countsWarn=[]; messagesWarn=[];
     
+	delim='#';
+	
     increment(key) {
         if (this.counts[key]===undefined)
             this.set(key,1);
@@ -24,8 +26,8 @@ module.exports = class ErrorList {
     push(message) {
         this.messages.push(message);
     }
-	push(errno, message) {
-        this.messages.push(errno+'#'+message);
+	pushC(errno, message) {
+        this.messages.push(errno+this.delim+message);
     }
     pushW(message) {
         this.messagesWarn.push(message);
