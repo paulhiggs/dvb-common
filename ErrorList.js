@@ -24,6 +24,9 @@ module.exports = class ErrorList {
     push(message) {
         this.messages.push(message);
     }
+	push(errno, message) {
+        this.messages.push(errno+'#'+message);
+    }
     pushW(message) {
         this.messagesWarn.push(message);
     }
