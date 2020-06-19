@@ -46,6 +46,9 @@ module.exports = Object.freeze({
 
     JPEG_IMAGE_CS_VALUE: FILE_FORMAT_CS+":1",
     PNG_IMAGE_CS_VALUE: FILE_FORMAT_CS+":15",	
+	
+	EIT_PROGRAMME_CRID_TYPE: "eit-programme-crid",
+	EIT_SERIES_CRID_TYPE: "eit-series-crid",
 
 // A177v1 only table 15 - deprecated in A177v2
     DVBT_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-t",
