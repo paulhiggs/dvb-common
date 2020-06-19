@@ -26,7 +26,7 @@ module.exports = class ErrorList {
     push(message) {
         this.messages.push(message);
     }
-	pushC(errno, message) {
+	pushCode(errno, message) {
         this.messages.push(errno+this.delim+message);
     }
     pushW(message) {
