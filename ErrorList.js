@@ -32,4 +32,7 @@ module.exports = class ErrorList {
     pushW(message) {
         this.messagesWarn.push(message);
     }
-}
+	pushCodeW(errno, message) {
+        this.messagesWarn.push(errno+this.delim+message);
+    }
+ }
