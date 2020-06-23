@@ -10,6 +10,7 @@ class IANAlanguages {
 	 */
 	constructor() {
 		this.languagesList=[];
+		this.languageRanges=[];
 	}
 
 	empty() {
@@ -48,8 +49,28 @@ class IANAlanguages {
 			var items=entry.replace(/(\r|\t)/gm,"").split("\n");
 			if (isIn(items,"Type: language") || isIn(items,"Type: extlang")) 
 				for (var i=0; i<items.length; i++) 
-					if (items[i].startsWith("Subtag:")) 
-						this.languagesList.push(items[i].split(":")[1].trim());
+					if (items[i].startsWith("Subtag:")) {
+		//				this.languagesList.push(items[i].split(":")[1].trim());
+
+ 						var val = items[i].split(":")[1].trim();
+						if (isIn(items,"Scope: private-use")) {
+							if (val.indexOf("..")<0) 
+								this.languagesList.push(val);
+							else {
+								var range=val.split("..");
+								if (range[0].length == range[1].length) {
+								
+									if (range[0]<range[1])
+										this.languageRanges.push({"start":range[0], "end":range[1]});
+									else
+										this.languageRanges.push({"start":range[1], "end":range[0]});
+								}
+									
+							}
+						}							
+						else
+							this.languagesList.push(val);
+					}
 		});
 	}
 
@@ -102,12 +123,19 @@ class IANAlanguages {
 	 * @return {boolean} true if value is a known language, else false
 	 */
 	isKnown(value){
-		if (typeof(this.languagesList) == "string")
+		if (typeof(this.languagesList)=="string")
 			return this.languagesList==value;
 		
-		if (typeof(this.languagesList) == "object") {
-			for (var x=0; x<this.languagesList.length; x++) 
-				if (this.languagesList[x] == value)
+		if (typeof(this.languagesList)=="object") {
+			
+			var x;
+			for (x=0; x<this.languageRanges.length; x++) 
+				if (this.languageRanges[x]["start"]<=value && value<=this.languageRanges[x]["end"])
+					return true;
+			
+			
+			for (x=0; x<this.languagesList.length; x++) 
+				if (this.languagesList[x]==value)
 					return true;
 		}
 		return false;
