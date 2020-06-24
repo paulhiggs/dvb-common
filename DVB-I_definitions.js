@@ -56,6 +56,10 @@ module.exports = Object.freeze({
 	
 	DEFAULT_GENRE_TYPE: "main",
 	GENRE_TYPE_MAIN: "main",
+	
+	DEFAULT_TITLE_TYPE: "main",
+	TITLE_MAIN_TYPE: "main",
+	TITLE_SECONDARY_TYPE: "secondary",
 
 // A177v1 only table 15 - deprecated in A177v2
     DVBT_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-t",
