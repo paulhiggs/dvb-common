@@ -121,5 +121,5 @@ module.exports = Object.freeze({
 	
 
 
-	__zzzDVB-IENDzzz__: null
+	__zzzDVB_IENDzzz__: null
 });
