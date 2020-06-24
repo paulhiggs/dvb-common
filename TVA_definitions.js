@@ -1,6 +1,8 @@
 
 module.exports = Object.freeze({
 
+	e_ProgramInformationTable: "ProgramInformationTable",
+
 	e_RelatedMaterial: 	"RelatedMaterial",
 	e_HowRelated: 		"HowRelated",
 	e_Synopsis:			"Synopsis",
@@ -23,8 +25,15 @@ module.exports = Object.freeze({
 	e_StillPictureFormat:"StillPictureFormat",
 	e_MediaURI:			"MediaURI",
 	e_Title:			"Title",
+	e_BasicDescription:	"BasicDescription",
+	e_ProgramInformation:"ProgramInformation",
+	e_GroupInformation:	"GroupInformation",
+	e_OtherIdentifier:	"OtherIdentifier",
+	e_MemberOf:			"MemberOf",
+	e_EpisodeOf:		"EpisodeOf",
+	e_ProgramDescription: "ProgramDescription",
 	
-	
+	a_crid:				"crid",
 	a_length:			"length",
 	v_lengthLong:		"long",
 	
@@ -34,7 +43,13 @@ module.exports = Object.freeze({
 	a_contentType:		"contentType",
 	a_horizontalSize:	"horizontalSize",
 	a_verticalSize:		"verticalSize",
+	a_programId:		"programId",
+	a_groupId:			"groupId",
+	a_ordered:			"ordered",
+	a_numOfItems:		"numOfItems",
+	a_serviceIDRef:		"serviceIDRef",
+	a_index:			"index",
 	
-	
+	t_MemberOfType:		"MemberOfType",
 	__zzzTVAENDzzz__: null
 });
