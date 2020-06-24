@@ -50,6 +50,13 @@ module.exports = Object.freeze({
 	EIT_PROGRAMME_CRID_TYPE: "eit-programme-crid",
 	EIT_SERIES_CRID_TYPE: "eit-series-crid",
 
+	DEFAULT_KEYWORD_TYPE: "main",
+	KEYWORD_TYPE_MAIN: "main",
+	KEYWORD_TYPE_OTHER: "other",
+	
+	DEFAULT_GENRE_TYPE: "main",
+	GENRE_TYPE_MAIN: "main",
+
 // A177v1 only table 15 - deprecated in A177v2
     DVBT_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-t",
     DVBS_SOURCE_TYPE: DVB_SOURCE_PREFIX + ":dvb-s",
@@ -114,5 +121,5 @@ module.exports = Object.freeze({
 	
 
 
-	__zzzENDzzz__: null
+	__zzzDVB-IENDzzz__: null
 });
