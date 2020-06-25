@@ -68,6 +68,7 @@ module.exports = Object.freeze({
 	a_length:			"length",
 	v_lengthLong:		"long",
 	
+	a_lang:				"lang",
 	a_type:				"type",
 	a_href:				"href",
 	a_role:				"role",
