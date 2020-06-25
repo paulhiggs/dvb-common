@@ -91,5 +91,7 @@ module.exports = Object.freeze({
 	t_MemberOfType:		"MemberOfType",
 	t_ProgramGroupTypeType:"ProgramGroupTypeType",
 	
+	cs_PromotionalStillImage: "urn:tva:metadata:cs:HowRelatedCS:2012:19",
+	
 	__zzzTVAENDzzz__: null
 });
