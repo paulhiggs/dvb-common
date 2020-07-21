@@ -74,7 +74,7 @@ module.exports = class ISOcountries {
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4) {
 				if (xhttp.status == 200) {
-					loader(xhttp.responseText);
+					this.countriesList = loader(xhttp.responseText);
 				}
 				else console.log("error ("+xhttp.status+") retrieving "+countriesURL);	
 			}
