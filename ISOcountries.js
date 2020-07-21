@@ -7,9 +7,11 @@ const fs = require("fs");
  * load the countries list into the allowedCountries global array from the specified text
  *
  * @param {String} countryData the text of the country JSON data
+ * @returns {object} processed JSON object of countries
  */
 function loadCountries(countryData) {
-	this.countriesList = JSON.parse(countryData, function (key, value) {
+
+	return JSON.parse(countryData, function (key, value) {
 		if (key == "numeric") {
 			return new Number(value);
 		} else if (key == "alpha2") {
@@ -21,6 +23,8 @@ function loadCountries(countryData) {
 			return value;
 		}
 	});
+
+
 }
 
 
@@ -50,7 +54,7 @@ module.exports = class ISOcountries {
 		if (purge) this.reset();
 		fs.readFile(countriesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
-				loadCountries(data);
+				this.countriesList = loadCountries(data);
 			} else {
 				console.log(err);
 			}
@@ -81,6 +85,10 @@ module.exports = class ISOcountries {
 
 	reset() {
 		this.countriesList.length=0;
+	}
+	
+	count() {
+		return this.countriesList.length;
 	}
 	
 	/**
