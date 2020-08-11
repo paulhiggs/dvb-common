@@ -29,10 +29,18 @@ module.exports = class ErrorList {
 	pushCode(errno, message) {
         this.messages.push(errno+this.delim+message);
     }
+	pushCategory(key, message) {
+		increment(key);
+		this.messages.push(message);
+	}
     pushW(message) {
         this.messagesWarn.push(message);
     }
 	pushCodeW(errno, message) {
         this.messagesWarn.push(errno+this.delim+message);
     }
+	pushCategoryW(key, message) {
+		incrementW(key);
+		this.messagesWarn.push(message);
+	}
  }
