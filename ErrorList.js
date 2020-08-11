@@ -23,24 +23,18 @@ module.exports = class ErrorList {
     setW(key,value) {
         this.countsWarn[key]=value;
     }
-    push(message) {
+    push(message, key=null) {
         this.messages.push(message);
+		if (key) increment(key);
     }
 	pushCode(errno, message) {
         this.messages.push(errno+this.delim+message);
     }
-	pushCategory(key, message) {
-		increment(key);
-		this.messages.push(message);
-	}
-    pushW(message) {
+    pushW(message, key=null) {
         this.messagesWarn.push(message);
+		if (key) incrementW(key);
     }
 	pushCodeW(errno, message) {
         this.messagesWarn.push(errno+this.delim+message);
     }
-	pushCategoryW(key, message) {
-		incrementW(key);
-		this.messagesWarn.push(message);
-	}
  }
