@@ -102,23 +102,23 @@ module.exports = class ISOcountries {
 		
 		if (this.use3CharCountries && countryCode.length==3) {
 			var i=0;
-			while (!found && i < countriesList.length) {
-				if (countryCode==countriesList[i].alpha3)
+			while (!found && i < this.countriesList.length) {
+				if (countryCode==this.countriesList[i].alpha3)
 					found=true;
 				i++;
 			}
-//			countriesList.forEach(country => {
+//			this.countriesList.forEach(country => {
 //				if (countryCode==country.alpha3) found=true;
 //			});
 		}
 		else if (this.use2CharCountries && countryCode.length==2) {
 			var i=0;
-			while (!found && i < countriesList.length) {
-				if (countryCode==countriesList[i].alpha2)
+			while (!found && i < this.countriesList.length) {
+				if (countryCode==this.countriesList[i].alpha2)
 					found=true;
 				i++;
 			}				
-//			countriesList.forEach(country => {
+//			this.countriesList.forEach(country => {
 //				if (countryCode==country.alpha3) found=true;
 //			});
 		}
