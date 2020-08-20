@@ -25,14 +25,14 @@ module.exports = class ErrorList {
     }
     push(message, key=null) {
         this.messages.push(message);
-		if (key) increment(key);
+		if (key) this.increment(key);
     }
 	pushCode(errno, message) {
         this.messages.push(errno+this.delim+message);
     }
     pushW(message, key=null) {
         this.messagesWarn.push(message);
-		if (key) incrementW(key);
+		if (key) this.incrementW(key);
     }
 	pushCodeW(errno, message) {
         this.messagesWarn.push(errno+this.delim+message);
