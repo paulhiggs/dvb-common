@@ -173,6 +173,7 @@ module.exports = Object.freeze({
 	e_Service: "Service",
 	e_ServiceInstance: "ServiceInstance",
 	e_ServiceGenre: "ServiceGenre",
+	e_ServiceList: "ServiceList",
 	e_ServiceName: "ServiceName",
 	e_ServiceType: "ServiceType",
 	e_SourceType: "SourceType",
