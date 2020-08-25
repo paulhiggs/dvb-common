@@ -135,7 +135,7 @@ module.exports = Object.freeze({
 	a_lang: "lang",
 	a_origNetId: "origNetId",
 	a_regionID: "regionID",
-	a_a_serviceId: "serviceId",
+	a_serviceId: "serviceId",
 	a_serviceRef: "serviceRef",
 	a_tsId: "tsId",
 	a_validFrom: "validFrom",
