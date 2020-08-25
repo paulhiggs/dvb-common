@@ -123,6 +123,8 @@ module.exports = Object.freeze({
     APP_IN_CONTROL: LINKED_APLICATION_CS+":1.2",
     APP_OUTSIDE_AVAILABILITY: LINKED_APLICATION_CS+":2",
 
+// possible values for DVB-S polarization
+	DVBS_POLARIZATION_VALUES: ["horizontal", "vertical", "left circular", "right circular"],
 
 // A177 defined elements and attributes	
 	a_CGSID: "CGSID",
@@ -174,6 +176,7 @@ module.exports = Object.freeze({
 	e_Period: "Period",
 	e_Polarization: "Polarization",
 	e_ProviderName: "ProviderName",
+	e_QueryParameters: "QueryParameters",
 	e_RecordingInfo: "RecordingInfo",
 	e_Region: "Region",
 	e_RegionList: "RegionList",
