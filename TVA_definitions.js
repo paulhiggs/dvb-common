@@ -52,7 +52,7 @@ module.exports = Object.freeze({
 	e_ParentalGuidance:	"ParentalGuidance",
 	e_ParentalRating:	"ParentalRating",
 	e_PersonName:		"PersonName",
-	e_PictureFormat:	"PictureFormat"
+	e_PictureFormat:	"PictureFormat", 
 	e_ProgramDescription: "ProgramDescription",
 	e_ProgramInformation:"ProgramInformation",
 	e_Program:			"Program",
