@@ -186,6 +186,7 @@ module.exports = Object.freeze({
 	e_RegionList: "RegionList",
 	e_RelatedMaterial: "RelatedMaterial",
 	e_RTSPDeliveryParameters: "RTSPDeliveryParameters",
+	e_SATIPDeliveryParameters: "SATIPDeliveryParameters",
 	e_Service: "Service",
 	e_ServiceInstance: "ServiceInstance",
 	e_ServiceGenre: "ServiceGenre",
