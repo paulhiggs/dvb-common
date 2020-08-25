@@ -193,6 +193,7 @@ module.exports = Object.freeze({
 	e_TargetCountry: "TargetCountry",
 	e_TargetRegion: "TargetRegion",
 	e_UniqueIdentifier: "UniqueIdentifier",
+	e_URI: "URI",
 	e_UriBasedLocation: "UriBasedLocation",
 	e_VideoAttributes: "VideoAttributes",
 	e_VideoConformancePoint: "VideoConformancePoint",
