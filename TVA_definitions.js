@@ -100,5 +100,9 @@ module.exports = Object.freeze({
 	
 	cs_PromotionalStillImage: "urn:tva:metadata:cs:HowRelatedCS:2012:19",
 	
+	
+	ALLOWED_GENRE_TYPES: ["main", "secondary", "other"],
+	
+	
 	__zzzTVAENDzzz__: null
 });
