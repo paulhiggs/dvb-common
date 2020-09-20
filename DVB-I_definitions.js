@@ -206,7 +206,7 @@ module.exports = Object.freeze({
 	e_CNAME: "CNAME",
 	e_Coding: "Coding",
 	e_ContentAttributes: "ContentAttributes",
-	e_ContentGuideServiceRef: "ContentGuideSourceRef",
+	e_ContentGuideServiceRef: "ContentGuideServiceRef",
 	e_ContentGuideSource: "ContentGuideSource",
 	e_ContentGuideSourceList: "ContentGuideSourceList",
 	e_ContentGuideSourceRef: "ContentGuideSourceRef",
