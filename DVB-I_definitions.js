@@ -75,11 +75,6 @@ module.exports = Object.freeze({
     CONTENT_TYPE_DASH_MPD: "application/dash+xml",    // MPD of linear service
     CONTENT_TYPE_DVB_PLAYLIST: "application/xml",     // XML Playlist
 
-// A177 6.11.1 - Audio Mix Type
-	AUDIO_MIX_MONO: "urn:mpeg:mpeg7:cs:AudioPresentationCS:2001:2",
-	AUDIO_MIX_STEREO: "urn:mpeg:mpeg7:cs:AudioPresentationCS:2001:3",
-	AUDIO_MIX_5_1: "urn:mpeg:mpeg7:cs:AudioPresentationCS:2001:5",
-
 // A177 6.11.2 - Audio Purpose
 	AUDIO_PURPOSE_MAIN: "urn:tva:metadata:cs:AudioPurposeCS:2007:1",
 	AUDIO_PURPOSE_DESCRIPTION: "urn:tva:metadata:cs:AudioPurposeCS:2007:6",
