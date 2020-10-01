@@ -7,7 +7,8 @@ class IANAlanguages {
 	languageKnown=1;
 	languageRedundant=2;
 
-	languagesList=[], redundantLanguagesList=[];
+	languagesList=[];
+	redundantLanguagesList=[];
 	/**
 	 * constructor
 	 *
