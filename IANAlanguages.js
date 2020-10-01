@@ -3,9 +3,9 @@ const fs = require("fs");
 
 class IANAlanguages {
 
-	const languageUnknown=0;
-	const languageKnown=1;
-	const languageRedundant=2;
+	languageUnknown=0;
+	languageKnown=1;
+	languageRedundant=2;
 
 	languagesList=[], redundantLanguagesList=[];
 	/**
