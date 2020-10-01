@@ -3,18 +3,23 @@ const fs = require("fs");
 
 class IANAlanguages {
 
-	languagesList=[];
+	const languageUnknown=0;
+	const languageKnown=1;
+	const languageRedundant=2;
+
+	languagesList=[], redundantLanguagesList=[];
 	/**
 	 * constructor
 	 *
 	 */
 	constructor() {
-		this.languagesList=[];
-		this.languageRanges=[];
+		empty();
 	}
 
 	empty() {
 		this.languagesList=[];
+		this.redundantLanguagesList=[];
+		this.languageRanges=[];
 	}
 
 	/**
@@ -71,6 +76,14 @@ class IANAlanguages {
 						else
 							this.languagesList.push(val);
 					}
+			if (isIn(items,"Type: redundant")) 
+				for (var i=0; i<items.length; i++) 
+					if (items[i].startsWith("Tag:")) {
+		//				this.languagesList.push(items[i].split(":")[1].trim());
+
+ 						var val = items[i].split(":")[1].trim();
+						this.redundantLanguagesList.push(val);
+					}
 		});
 	}
 
@@ -120,25 +133,42 @@ class IANAlanguages {
 	 * determines if a language is known 
 	 *
 	 * @param {String} value The value to check for existance
-	 * @return {boolean} true if value is a known language, else false
+	 * @return {integer} indicating the "known" state of the language
 	 */
 	isKnown(value){
+		let lcValue=value.toLowerCase();
+		
 		if (typeof(this.languagesList)=="string")
-			return this.languagesList==value;
+			return this.languagesList.toLowerCase()==lcValue?languageKnown:languageUnknown;
 		
 		if (typeof(this.languagesList)=="object") {
 			
+			if (this.languageRanges.find(range => range["start"]<=value && value<=range["end"]))
+				return this.languageKnown;
+/*
 			var x;
 			for (x=0; x<this.languageRanges.length; x++) 
 				if (this.languageRanges[x]["start"]<=value && value<=this.languageRanges[x]["end"])
-					return true;
+					return this.languageKnown;	
+*/
+
 			
-			
+			if (this.languagesList.find(lang => lang.toLowerCase()==lcValue))
+				return this.languageKnown;
+/*
 			for (x=0; x<this.languagesList.length; x++) 
-				if (this.languagesList[x]==value)
-					return true;
+				if (this.languagesList[x].toLowerCase()==lcValue)
+					return this.languageKnown;
+*/	
+			if (this.redundantLanguagesList.find(lang => lang.toLowerCase()==lcValue))
+				return this.languageRedundant;
+/*			
+			for (x=0; x<this.redundantLanguagesList.length; x++) 
+				if (this.redundantLanguagesList[x].toLowerCase()==lcValue)
+					return this.languageRedundant;
+*/			
 		}
-		return false;
+		return this.languageUnnown;
 	}	
 }
 
