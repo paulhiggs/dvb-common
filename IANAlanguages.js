@@ -14,7 +14,7 @@ class IANAlanguages {
 	 *
 	 */
 	constructor() {
-		empty();
+		this.empty();
 	}
 
 	empty() {
