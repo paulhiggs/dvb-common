@@ -10,7 +10,7 @@ const libxml = require("libxmljs");
  * @param {String} CSuri The classification scheme domian
  * @param {Object} term The classification scheme term that may include nested subterms
  */
-function addCSTerm(values,CSuri,term){
+function addCSTerm(values, CSuri, term){
     if (term.name()==="Term") {
         values.push(CSuri+":"+term.attr("termID").value())
         var st=0, subTerm;

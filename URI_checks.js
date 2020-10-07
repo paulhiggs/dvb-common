@@ -1,8 +1,8 @@
 /**
  * determine if the passed value conforms to am IETF RFC4151 TAG URI
  *
- * @param {string} identifier The service identifier to be checked
- * @return {boolean} true of the service identifier is in RFC4151 TAG URI format
+ * @param {string} identifier  The service identifier to be checked
+ * @return {boolean}           true if the service identifier is in RFC4151 TAG URI format
  */
 module.exports.isTAGURI = function (identifier){
     // RFC 4151 compliant - https://tools.ietf.org/html/rfc4151
@@ -15,6 +15,7 @@ module.exports.isTAGURI = function (identifier){
 
 /**
  * check if the argument complies to a CRID format
+ *
  * @param {string} value	value whose format to check
  * @returns	{boolean}		true if the argument confirms to the CRID format, else false
  **/
