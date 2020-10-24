@@ -123,6 +123,9 @@ module.exports = Object.freeze({
 // possible values for DVB-S polarization
 	DVBS_POLARIZATION_VALUES: ["horizontal", "vertical", "left circular", "right circular"],
 
+// @encryptionScheme values
+	ENCRYPRION_VALID_TYPES: ["cenc", "cbcs", "cbcs-10"],
+
 // A177 defined elements and attributes	
 	a_Address: "Address",
 	a_CGSID: "CGSID",
