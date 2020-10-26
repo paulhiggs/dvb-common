@@ -76,6 +76,7 @@ module.exports = Object.freeze({
 	e_VerticalSize:		"VerticalSize", 
 	e_VideoAttributes:	"VideoAttributes", 
 	
+	a_average:			"average",
 	a_closed:			"closed",
 	a_contentType:		"contentType",
 	a_crid:				"crid",
@@ -86,6 +87,8 @@ module.exports = Object.freeze({
 	a_index:			"index",
 	a_lang:				"lang",
 	a_length:			"length",
+	a_maximum:			"maximum",
+	a_minimum:			"minimum",
 	a_numOfItems:		"numOfItems",
 	a_ordered:			"ordered",
 	a_primary:			"primary",
@@ -97,6 +100,7 @@ module.exports = Object.freeze({
 	a_supplemental:		"supplemental",
 	a_translation:		"translation",
 	a_type:				"type",
+	a_variable:			"variable",
 	a_value:			"value",
 	a_verticalSize:		"verticalSize",
 
