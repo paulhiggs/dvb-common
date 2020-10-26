@@ -1,6 +1,10 @@
 
 module.exports = Object.freeze({
 
+	SCAN_TYPES: 	["interlaced", "progressive"],
+	COLOR_TYPES:	["color", "blackAndWhite", "blackAndWhiteAndColor", "colorized"],
+
+
 	e_TVAMain:			"TVAMain",
 	e_ProgramInformationTable: "ProgramInformationTable",
 	e_ProgramLocationTable: "ProgramLocationTable",
