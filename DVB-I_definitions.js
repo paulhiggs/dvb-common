@@ -126,6 +126,9 @@ module.exports = Object.freeze({
 // @encryptionScheme values
 	ENCRYPTION_VALID_TYPES: ["cenc", "cbcs", "cbcs-10"],
 
+// @TransportProtocol values
+	ALLOWED_TRANSPORT_PROTOCOLS: ["RTP-AVP", "UDP-FEC"],
+
 // A177 defined elements and attributes	
 	a_Address: "Address",
 	a_CGSID: "CGSID",
