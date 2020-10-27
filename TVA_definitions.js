@@ -3,7 +3,8 @@ module.exports = Object.freeze({
 
 	SCAN_TYPES: 	["interlaced", "progressive"],
 	COLOR_TYPES:	["color", "blackAndWhite", "blackAndWhiteAndColor", "colorized"],
-
+	
+	ALLOWED_ASPECT_RATIO_TYPES: ["original", "publication"],
 
 	e_TVAMain:			"TVAMain",
 	e_ProgramInformationTable: "ProgramInformationTable",
