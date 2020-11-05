@@ -196,6 +196,7 @@ module.exports = Object.freeze({
 	e_Availability: "Availability",
 	e_CASystemId: "CASystemId",
 	e_CNAME: "CNAME",
+	e_Colorimetry: "Colorimetry",
 	e_ContentAttributes: "ContentAttributes",
 	e_ContentGuideServiceRef: "ContentGuideServiceRef",
 	e_ContentGuideSource: "ContentGuideSource",
