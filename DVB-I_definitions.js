@@ -12,21 +12,13 @@ const DVB_RELATED_CS_v2 = "urn:dvb:metadata:cs:HowRelatedCS:2020";
 module.exports = Object.freeze({
 	A177v1_Namespace: "urn:dvb:metadata:servicediscovery:2019",
     A177v2_Namespace: "urn:dvb:metadata:servicediscovery:2020",
+    A177v3_Namespace: "urn:dvb:metadata:servicediscovery:202x",
 	
     MAX_TITLE_LENGTH: 80,
     MAX_KEYWORD_LENGTH: 32,
 	MAX_ORGANIZATION_NAME_LENGTH: 32,
 	MAX_NAME_PART_LENGTH: 32,
 	MAX_EXPLANATORY_TEXT_LENGTH: 160,
-	
-	SYNOPSIS_SHORT_LABEL: "short",
-	SYNOPSIS_SHORT_LENGTH: 90,
-	
-    SYNOPSIS_MEDIUM_LABEL: "medium", 
-    SYNOPSIS_MEDIUM_LENGTH: 250, 
-	
-    SYNOPSIS_LONG_LABEL: "long",
-	SYNOPSIS_LONG_LENGTH: 1200, 
 	
 	XML_AIT_CONTENT_TYPE: "application/vnd.dvb.ait+xml",
 	HTML5_APP: "text/html",
@@ -263,6 +255,7 @@ module.exports = Object.freeze({
 	e_ScheduleInfoEndpoint: "ScheduleInfoEndpoint",
 	e_SegmentReference: "SegmentReference",
 	e_Service: "Service",
+	e_ServiceDescription: "ServiceDescription",
 	e_ServiceInstance: "ServiceInstance",
 	e_ServiceGenre: "ServiceGenre",
 	e_ServiceList: "ServiceList",

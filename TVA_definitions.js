@@ -1,6 +1,17 @@
 
 module.exports = Object.freeze({
 
+	SYNOPSIS_BRIEF_LABEL: "brief",
+	SYNOPSIS_SHORT_LENGTH: 30,
+	SYNOPSIS_SHORT_LABEL: "short",
+	SYNOPSIS_SHORT_LENGTH: 90,
+    SYNOPSIS_MEDIUM_LABEL: "medium", 
+    SYNOPSIS_MEDIUM_LENGTH: 250, 
+    SYNOPSIS_LONG_LABEL: "long",
+	SYNOPSIS_LONG_LENGTH: 1200, 
+	SYNOPSIS_EXTENDED_LABEL: "extended",
+	
+	
 	SCAN_TYPES: 	["interlaced", "progressive"],
 	COLOR_TYPES:	["color", "blackAndWhite", "blackAndWhiteAndColor", "colorized"],
 	
