@@ -67,6 +67,13 @@ module.exports = Object.freeze({
     CONTENT_TYPE_DASH_MPD: "application/dash+xml",    // MPD of linear service
     CONTENT_TYPE_DVB_PLAYLIST: "application/xml",     // XML Playlist
 
+// A177 5.5.24  <VideoAttribites><Colorimetry>
+	COLORIMETRY_BT709: "urn:dvb:metadata:cs:ColorimetryCS:2020:1",
+	COLORIMETRY_BT2020_NCL: "urn:dvb:metadata:cs:ColorimetryCS:2020:2.1",
+	COLORIMETRY_BT2100_NCL: "urn:dvb:metadata:cs:ColorimetryCS:2020:3.1",
+	
+	ALLOWED_COLORIMETRY: [this.COLORIMETRY_BT709, this.COLORIMETRY_BT2020_NCL, this.COLORIMETRY_BT2100_NCL],
+	
 // A177 6.11.2 - Audio Purpose
 	AUDIO_PURPOSE_MAIN: "urn:tva:metadata:cs:AudioPurposeCS:2007:1",
 	AUDIO_PURPOSE_DESCRIPTION: "urn:tva:metadata:cs:AudioPurposeCS:2007:6",
