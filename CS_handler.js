@@ -14,9 +14,8 @@ function addCSTerm(values, CSuri, term){
     if (term.name()==="Term") {
         values.push(CSuri+":"+term.attr("termID").value())
         var st=0, subTerm;
-        while (subTerm=term.child(st++)) {
+        while (subTerm=term.child(st++))
             addCSTerm(values,CSuri,subTerm);
-        }
     }
 }
 
@@ -31,9 +30,8 @@ function loadClassificationScheme(values, xmlCS) {
 	var CSnamespace = xmlCS.root().attr("uri");
 	if (!CSnamespace) return;
 	var t=0, term;
-	while (term=xmlCS.root().child(t++)) {
+	while (term=xmlCS.root().child(t++))
 		addCSTerm(values,CSnamespace.value(),term);
-	}
 }
 
 /**
@@ -45,11 +43,9 @@ function loadClassificationScheme(values, xmlCS) {
 function loadCSfromFile(values, classificationScheme) {
 	console.log("reading CS from", classificationScheme);
     fs.readFile(classificationScheme, {encoding: "utf-8"}, function(err,data){
-        if (!err) {
+        if (!err) 
 			loadClassificationScheme(values, libxml.parseXmlString(data.replace(/(\r\n|\n|\r|\t)/gm,"")));
-        } else {
-            console.log(err);
-        }
+		else console.log(err);
     });
 }
 
@@ -64,9 +60,8 @@ function loadCSfromURL(values, csURL) {
 	var xhttp = new XmlHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
-			if (this.status == 200) {
+			if (this.status == 200) 
 				loadClassificationScheme(values, libxml.parseXmlString(xhttp.responseText));
-			}
 			else console.log("error ("+this.status+") retrieving "+csURL);	
 		}
 	};
