@@ -112,6 +112,7 @@ module.exports = Object.freeze({
 	a_supplemental:		"supplemental",
 	a_translation:		"translation",
 	a_type:				"type",
+	a_uriType:			"uriType",
 	a_variable:			"variable",
 	a_value:			"value",
 	a_verticalSize:		"verticalSize",
