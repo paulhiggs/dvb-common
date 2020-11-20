@@ -101,25 +101,31 @@ module.exports = class ISOcountries {
 		var found=false;
 		
 		if (this.use3CharCountries && countryCode.length==3) {
-			var i=0;
-			while (!found && i < this.countriesList.length) {
-				if (countryCode==this.countriesList[i].alpha3)
-					found=true;
-				i++;
-			}
+//			var i=0;
+//			while (!found && i < this.countriesList.length) {
+//				if (countryCode==this.countriesList[i].alpha3)
+//					found=true;
+//				i++;
+//			}
+			
+			if (this.countriesList.find(elem => elem.alpha3==countryCode))
+				found=true
+
 //			this.countriesList.forEach(country => {
 //				if (countryCode==country.alpha3) found=true;
 //			});
 		}
 		else if (this.use2CharCountries && countryCode.length==2) {
-			var i=0;
-			while (!found && i < this.countriesList.length) {
-				if (countryCode==this.countriesList[i].alpha2)
-					found=true;
-				i++;
-			}				
+//			var i=0;
+//			while (!found && i < this.countriesList.length) {
+//				if (countryCode==this.countriesList[i].alpha2)
+//					found=true;
+//				i++;
+//			}				
+			if (this.countriesList.find(elem => elem.alpha2==countryCode))
+				found=true
 //			this.countriesList.forEach(country => {
-//				if (countryCode==country.alpha3) found=true;
+//				if (countryCode==country.alpha2) found=true;
 //			});
 		}
 		return found;

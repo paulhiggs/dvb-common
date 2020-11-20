@@ -42,7 +42,7 @@ class IANAlanguages {
 			if (typeof(values)=="string")
 				return values==value;
 		   
-			if (typeof(values)=="object") 	
+			if (Array.isArray(values)) 	
 				return values.includes(value)
 			
 			return false;
@@ -50,31 +50,27 @@ class IANAlanguages {
 		
 		var entries = languageData.split("%%");
 		entries.forEach(entry => {
-			var items=entry.replace(/(\r|\t)/gm,"").split("\n");
+			let items=entry.replace(/(\r|\t)/gm,"").split("\n");
 			if (isIn(items,"Type: language") || isIn(items,"Type: extlang")) 
-				for (var i=0; i<items.length; i++) 
+				for (let i=0; i<items.length; i++) 
 					if (items[i].startsWith("Subtag:")) {
- 						let val = items[i].split(":")[1].trim();
+ 						let val=items[i].split(":")[1].trim();
 						if (isIn(items,"Scope: private-use")) {
 							if (val.indexOf("..")<0) 
 								this.languagesList.push(val);
 							else {
 								let range=val.split("..");
 								if (range[0].length == range[1].length) {
-								
 									if (range[0]<range[1])
 										this.languageRanges.push({"start":range[0], "end":range[1]});
-									else
-										this.languageRanges.push({"start":range[1], "end":range[0]});
+									else this.languageRanges.push({"start":range[1], "end":range[0]});
 								}
-									
 							}
 						}							
-						else
-							this.languagesList.push(val);
+						else this.languagesList.push(val);
 					}
 			if (isIn(items,"Type: redundant")) 
-				for (var i=0; i<items.length; i++) 
+				for (let i=0; i<items.length; i++) 
 					if (items[i].startsWith("Tag:")) {
  						let val=items[i].split(":")[1].trim();
 						this.redundantLanguagesList.push(val);
@@ -109,10 +105,10 @@ class IANAlanguages {
 		console.log("retrieving languages from", languagesURL);
 		if (purge) this.empty();
 		const loader=this.loadLanguages.bind(this);
-		var xhttp = new XmlHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4) {
-				if (xhttp.status == 200) {
+		var xhttp=new XmlHttpRequest();
+		xhttp.onreadystatechange=function() {
+			if (xhttp.readyState==4) {
+				if (xhttp.status==200) {
 					loader(xhttp.responseText);
 				}
 				else console.log("error ("+xhttp.status+") retrieving "+languagesURL);	
