@@ -12,7 +12,7 @@ const libxml = require("libxmljs")
  */
 function hasChild(elem, childElementName) {
 	let ch=0, c
-	while (c=elem.child(ch))
+	while (c=elem.child(ch++))
 		if (c.type()=="element" && c.name()==="Term")
 			return true
 	
