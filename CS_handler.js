@@ -29,7 +29,7 @@ function hasChild(elem, childElementName) {
  */
 function addCSTerm(values, CSuri, term, leafNodesOnly=false) {
     if (term.name()==="Term") {
-		if (leafNodesOnly && !hasChild(term, "Term"))
+		if (!leafNodesOnly || (leafNodesOnly && !hasChild(term, "Term")))
 			if (term.attr("termID")) 
 				values.push(CSuri+":"+term.attr("termID").value())
         var st=0, subTerm
