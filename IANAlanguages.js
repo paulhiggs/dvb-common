@@ -145,7 +145,7 @@ class IANAlanguages {
 			if (this.redundantLanguagesList.find(lang => lang.toLowerCase()==lcValue))
 				return this.languageRedundant;		
 		}
-		return this.languageUnnown;
+		return this.languageUnknown;
 	}	
 }
 
