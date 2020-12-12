@@ -92,12 +92,13 @@ module.exports = class ISOcountries {
 			}
 			return response
 		}
-		const loader=this.loadCountries.bind(this);
+		const loader=loadCountries.bind(this)
 		
 		fetch(countriesURL)
 		.then(handleErrors)
 		.then(response => response.text())
 		.then(responseText => this.countriesList=this.loader(responseText))
+		.catch(error => console.log("error ("+error+") retrieving "+csURL))
 /*		
 		const loader=this.loadCountries.bind(this);
 		var xhttp = new XmlHttpRequest();
