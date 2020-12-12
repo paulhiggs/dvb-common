@@ -97,7 +97,7 @@ module.exports = class ISOcountries {
 		fetch(countriesURL)
 		.then(handleErrors)
 		.then(response => response.text())
-		.then(responseText => this.countriesList=this.loader(responseText))
+		.then(responseText => this.countriesList=loadCountries(responseText))
 		.catch(error => console.log("error ("+error+") retrieving "+countriesURL))
 /*		
 		const loader=this.loadCountries.bind(this);
