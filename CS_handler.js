@@ -78,7 +78,7 @@ function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
  * @param {String} csURL URL to the classification scheme
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
-function loadCSfromURL-xhttp(values, csURL, leafNodesOnly=false) { 
+function loadCSfromURL_xhttp(values, csURL, leafNodesOnly=false) { 
 	console.log("retrieving CS from", csURL);
 	var xhttp = new XmlHttpRequest();
 	xhttp.onreadystatechange = function() {
