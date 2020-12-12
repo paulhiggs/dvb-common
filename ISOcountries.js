@@ -92,6 +92,7 @@ module.exports = class ISOcountries {
 			}
 			return response
 		}
+		const loader=this.loadCountries.bind(this);
 		
 		fetch(countriesURL)
 		.then(handleErrors)
