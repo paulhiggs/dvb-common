@@ -1,5 +1,5 @@
-const XmlHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const fs = require("fs");
+const fetch=require('node-fetch')
+const fs=require('fs')
 
 class IANAlanguages {
 
@@ -29,8 +29,8 @@ class IANAlanguages {
 	 *
 	 * @param {String} languagesData the text of the language data
 	 */
-	/*private function*/ loadLanguages(languageData) {
-	
+	/*private function*/ 
+	loadLanguages(languageData) {
 		/**
 		 * determines if a value is in a set of values - simular to 
 		 *
@@ -83,6 +83,7 @@ class IANAlanguages {
 	 * file is formatted according to www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	 *
 	 * @param {String} languagesFile the file name to load
+	 * @param {boolean} purge  erase the existing values before loading new
 	 */
 	loadLanguagesFromFile(languagesFile, purge=false) {
 		console.log("reading languages from", languagesFile);
@@ -100,22 +101,24 @@ class IANAlanguages {
 	 * load the languages list into the knownLanguages global array from the specified URL
 	 *
 	 * @param {String} languagesURL the URL to load
+	 * @param {boolean} purge  erase the existing values before loading new
 	 */
 	loadLanguagesFromURL(languagesURL, purge=false) {
-		console.log("retrieving languages from", languagesURL);
+		console.log("retrieving languages from", languagesURL, "using fetch()")
 		if (purge) this.empty();
-		const loader=this.loadLanguages.bind(this);
-		var xhttp=new XmlHttpRequest();
-		xhttp.onreadystatechange=function() {
-			if (xhttp.readyState==4) {
-				if (xhttp.status==200) {
-					loader(xhttp.responseText);
-				}
-				else console.log("error ("+xhttp.status+") retrieving "+languagesURL);	
+		
+		function handleErrors(response) {
+			if (!response.ok) {
+				throw Error(response.statusText)
 			}
-		};
-		xhttp.open("GET", languagesURL, true);
-		xhttp.send();
+			return response
+		}
+		
+		fetch(languagesURL)
+			.then(handleErrors)
+			.then(response => response.text())
+			.then(responseText => loadLanguages(responseText))
+			.catch(error => console.log("error ("+error+") retrieving "+languagesURL))
 	}
 
 	

@@ -1,5 +1,4 @@
 
-const XmlHttpRequest=require("xmlhttprequest").XMLHttpRequest
 const fetch=require('node-fetch')
 const fs=require("fs")
 
@@ -29,7 +28,6 @@ function loadCountries(countryData) {
 
 module.exports = class ISOcountries {
 	
-	
 	/**
 	 * constructor
 	 *
@@ -47,13 +45,14 @@ module.exports = class ISOcountries {
 	 * load the countries list into the allowedCountries global array from the specified JSON file
 	 *
 	 * @param {String} countriesFile the file name to load
+	 * @param {boolean} purge  erase the existing values before loading new
 	 */
 	loadCountriesFromFile = function(countriesFile, purge=false) {
 		console.log("reading countries from", countriesFile);
 		if (purge) this.reset();
 		fs.readFile(countriesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
-				this.countriesList = loadCountries(data);
+				this.countriesList=loadCountries(data);
 			} else {
 				console.log(err);
 			}
@@ -64,26 +63,10 @@ module.exports = class ISOcountries {
 	 * load the countries list into the allowedCountries global array from the specified JSON file
 	 *
 	 * @param {String} countriesURL the URL to the file to load
+	 * @param {boolean} purge  erase the existing values before loading new
 	 */
-	loadCountriesFromURL_old = function(countriesURL, purge=false) {
-		console.log("retrieving countries from", countriesURL);
-		if (purge) this.reset();
-		const loader=this.loadCountries.bind(this);
-		var xhttp = new XmlHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4) {
-				if (xhttp.status == 200) {
-					this.countriesList = loader(xhttp.responseText);
-				}
-				else console.log("error ("+xhttp.status+") retrieving "+countriesURL);	
-			}
-		};
-		xhttp.open("GET", countriesURL, true);
-		xhttp.send();	
-	}
-	
 	loadCountriesFromURL = function(countriesURL, purge=false) {
-		console.log("retrieving countries from", countriesURL);
+		console.log("retrieving countries from", countriesURL, "using fetch()")
 		if (purge) this.reset();
 
 		function handleErrors(response) {
@@ -92,29 +75,13 @@ module.exports = class ISOcountries {
 			}
 			return response
 		}
-		const loader=loadCountries.bind(this)
 		
 		fetch(countriesURL)
-		.then(handleErrors)
-		.then(response => response.text())
-		.then(responseText => this.countriesList=loadCountries(responseText))
-		.catch(error => console.log("error ("+error+") retrieving "+countriesURL))
-/*		
-		const loader=this.loadCountries.bind(this);
-		var xhttp = new XmlHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4) {
-				if (xhttp.status == 200) {
-					this.countriesList = loader(xhttp.responseText);
-				}
-				else console.log("error ("+xhttp.status+") retrieving "+countriesURL);	
-			}
-		};
-		xhttp.open("GET", countriesURL, true);
-		xhttp.send();	
-		*/
+			.then(handleErrors)
+			.then(response => response.text())
+			.then(responseText => this.countriesList=loadCountries(responseText))
+			.catch(error => console.log("error ("+error+") retrieving "+countriesURL))
 	}
-
 
 	reset() {
 		this.countriesList.length=0;
@@ -134,32 +101,12 @@ module.exports = class ISOcountries {
 		var found=false;
 		
 		if (this.use3CharCountries && countryCode.length==3) {
-//			var i=0;
-//			while (!found && i < this.countriesList.length) {
-//				if (countryCode==this.countriesList[i].alpha3)
-//					found=true;
-//				i++;
-//			}
-			
 			if (this.countriesList.find(elem => elem.alpha3==countryCode))
 				found=true
-
-//			this.countriesList.forEach(country => {
-//				if (countryCode==country.alpha3) found=true;
-//			});
 		}
 		else if (this.use2CharCountries && countryCode.length==2) {
-//			var i=0;
-//			while (!found && i < this.countriesList.length) {
-//				if (countryCode==this.countriesList[i].alpha2)
-//					found=true;
-//				i++;
-//			}				
 			if (this.countriesList.find(elem => elem.alpha2==countryCode))
 				found=true
-//			this.countriesList.forEach(country => {
-//				if (countryCode==country.alpha2) found=true;
-//			});
 		}
 		return found;
 	}
