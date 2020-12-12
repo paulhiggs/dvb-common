@@ -1,7 +1,8 @@
 //---------------- CLASSIFICATION SCHEME LOADING ---------------- 
 
 const fs=require("fs")
-const libxml = require("libxmljs")
+const libxml=require("libxmljs")
+const fetch=require("node-fetch")
 
 /**
  * check if the element contains the named child element
@@ -77,7 +78,7 @@ function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
  * @param {String} csURL URL to the classification scheme
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
-function loadCSfromURL(values, csURL, leafNodesOnly=false) { 
+function loadCSfromURL-xhttp(values, csURL, leafNodesOnly=false) { 
 	console.log("retrieving CS from", csURL);
 	var xhttp = new XmlHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -90,6 +91,44 @@ function loadCSfromURL(values, csURL, leafNodesOnly=false) {
 	xhttp.open("GET", csURL, true);
 	xhttp.send();
 } 
+
+/**
+ * read a classification scheme from a URL and load its hierarical values into a linear list 
+ *
+ * @param {Array} values The linear list of values within the classification scheme
+ * @param {String} csURL URL to the classification scheme
+ * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
+ */
+function loadCSfromURL(values, csURL, leafNodesOnly=false) { 
+	console.log("retrieving CS from", csURL, "via Fetch()")
+	
+	function handleErrors(response) {
+		if (!response.ok) {
+			throw Error(response.statusText)
+		}
+		return response
+	}
+	
+	fetch(csURL)
+	.then(handleErrors)
+	.then(response => response.text())
+	.then(strXML => loadClassificationScheme(values, libxml.parseXmlString(strXML), leafNodesOnly))
+	.catch(error => console.log("error ("+error+") retrieving "+csURL))
+/*	
+	var xhttp = new XmlHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4) {
+			if (this.status == 200) 
+				loadClassificationScheme(values, libxml.parseXmlString(xhttp.responseText), leafNodesOnly);
+			else console.log("error ("+this.status+") retrieving "+csURL);	
+		}
+	};
+	xhttp.open("GET", csURL, true);
+	xhttp.send();
+*/
+}
+
+
  
 /**
  * loads classification scheme values from either a local file or an URL based location
