@@ -1,6 +1,7 @@
 
-const XmlHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const fs = require("fs");
+const XmlHttpRequest=require("xmlhttprequest").XMLHttpRequest
+const fetch=require('node-fetch')
+const fs=require("fs")
 
 
 /**
@@ -23,8 +24,6 @@ function loadCountries(countryData) {
 			return value;
 		}
 	});
-
-
 }
 
 
@@ -66,7 +65,7 @@ module.exports = class ISOcountries {
 	 *
 	 * @param {String} countriesURL the URL to the file to load
 	 */
-	loadCountriesFromURL = function(countriesURL, purge=false) {
+	loadCountriesFromURL_old = function(countriesURL, purge=false) {
 		console.log("retrieving countries from", countriesURL);
 		if (purge) this.reset();
 		const loader=this.loadCountries.bind(this);
@@ -82,6 +81,38 @@ module.exports = class ISOcountries {
 		xhttp.open("GET", countriesURL, true);
 		xhttp.send();	
 	}
+	
+	loadCountriesFromURL_ = function(countriesURL, purge=false) {
+		console.log("retrieving countries from", countriesURL);
+		if (purge) this.reset();
+
+		function handleErrors(response) {
+			if (!response.ok) {
+				throw Error(response.statusText)
+			}
+			return response
+		}
+		
+		fetch(countriesURL)
+		.then(handleErrors)
+		.then(response => response.text())
+		.then(responseText => this.countriesList=this.loader(responseText))
+/*		
+		const loader=this.loadCountries.bind(this);
+		var xhttp = new XmlHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4) {
+				if (xhttp.status == 200) {
+					this.countriesList = loader(xhttp.responseText);
+				}
+				else console.log("error ("+xhttp.status+") retrieving "+countriesURL);	
+			}
+		};
+		xhttp.open("GET", countriesURL, true);
+		xhttp.send();	
+		*/
+	}
+
 
 	reset() {
 		this.countriesList.length=0;
