@@ -117,7 +117,7 @@ class IANAlanguages {
 		fetch(languagesURL)
 			.then(handleErrors)
 			.then(response => response.text())
-			.then(responseText => loadLanguages(responseText))
+			.then(responseText => this.loadLanguages(responseText))
 			.catch(error => console.log("error ("+error+") retrieving "+languagesURL))
 	}
 
