@@ -82,7 +82,7 @@ module.exports = class ISOcountries {
 		xhttp.send();	
 	}
 	
-	loadCountriesFromURL_ = function(countriesURL, purge=false) {
+	loadCountriesFromURL = function(countriesURL, purge=false) {
 		console.log("retrieving countries from", countriesURL);
 		if (purge) this.reset();
 
