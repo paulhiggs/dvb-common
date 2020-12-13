@@ -196,12 +196,11 @@ class IANAlanguages {
 	}
 	
 	isKnownSignLanguage(value){
-	
 		let lcValue=value.toLowerCase()
-		let res=checkSignLanguage(lcValue)
+		let res=this.checkSignLanguage(lcValue)
 		
 		if (res==this.languageUnknown)
-			res=checkSignLanguage("sgn="+lcValue)
+			res=this.checkSignLanguage("sgn="+lcValue)
 		
 		return res
 	}	
