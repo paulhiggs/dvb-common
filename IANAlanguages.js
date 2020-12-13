@@ -10,9 +10,7 @@ class IANAlanguages {
 	languagesList=[];
 	languageRanges=[];
 	signLanguagesList=[];
-	signLanguageRanges=[];
 	redundantLanguagesList=[];
-
 	
 	
 	/**
@@ -28,7 +26,6 @@ class IANAlanguages {
 		this.redundantLanguagesList=[];
 		this.languageRanges=[];
 		this.signLanguagesList=[];
-		this.signLanguageRanges=[];
 	}
 
 	/**
@@ -81,27 +78,23 @@ class IANAlanguages {
 					if (items[i].startsWith("Subtag:")) {
  						let val=items[i].split(":")[1].trim();
 						if (isIn(items,"Scope: private-use")) {
-							if (val.indexOf("..")<0) {
+							if (val.indexOf("..")<0) 
 								this.languagesList.push(val)
-								if (signingLanguage) this.signLanguagesList.push(val)
-							}
 							else {
 								let range=val.split("..");
 								if (range[0].length == range[1].length) {
-									if (range[0]<range[1]) {
+									if (range[0]<range[1]) 
 										this.languageRanges.push({"start":range[0], "end":range[1]})
-										if (signingLanguage)
-											this.signLanguageRanges.push({"start":range[0], "end":range[1]})
-									}
-									else {
+									
+									else 
 										this.languageRanges.push({"start":range[1], "end":range[0]})
-										if (signingLanguage)
-											this.signLanguageRanges.push({"start":range[1], "end":range[0]})
-									}
 								}
 							}
 						}							
-						else this.languagesList.push(val);
+						else {
+							this.languagesList.push(val)
+							if (signingLanguage) this.signLanguagesList.push(val)
+						}
 					}
 				}
 			if (isIn(items,"Type: redundant")) 
@@ -186,9 +179,6 @@ class IANAlanguages {
 	 */
 	/* private function */ 
 	checkSignLanguage(language) {
-		if (this.signLanguageRanges.find(range => range["start"]<=language && language<=range["end"]))
-			return this.languageKnown;
-		
 		if (this.signLanguagesList.find(lang => lang.toLowerCase()==language))
 			return this.languageKnown;
 			
@@ -200,7 +190,7 @@ class IANAlanguages {
 		let res=this.checkSignLanguage(lcValue)
 		
 		if (res==this.languageUnknown)
-			res=this.checkSignLanguage("sgn="+lcValue)
+			res=this.checkSignLanguage("sgn-"+lcValue)
 		
 		return res
 	}	
