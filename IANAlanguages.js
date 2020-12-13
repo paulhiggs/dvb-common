@@ -187,15 +187,24 @@ class IANAlanguages {
 	 * @return {integer} indicating the "known" state of the language
 	 */
 	isKnownSignLanguage(value){
-		let lcValue=value.toLowerCase();
-			
-		if (this.signLanguageRanges.find(range => range["start"]<=value && value<=range["end"]))
-			return this.languageKnown;
 		
-		if (this.signLanguagesList.find(lang => lang.toLowerCase()==lcValue))
-			return this.languageKnown;
+		function checkSignLanguane(language) {
+			if (this.signLanguageRanges.find(range => range["start"]<=language && language<=range["end"]))
+				return this.languageKnown;
 			
-		return this.languageUnknown;
+			if (this.signLanguagesList.find(lang => lang.toLowerCase()==language))
+				return this.languageKnown;
+				
+			return this.languageUnknown;
+		}
+		
+		let lcValue=value.toLowerCase()
+		let res=checkSignLanguage(lcValue)
+		
+		if (res==this.languageUnknown)
+			res=checkSignLanguage("sgn="+lcValue)
+		
+		return res
 	}	
 }
 
