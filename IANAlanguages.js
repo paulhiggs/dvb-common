@@ -65,7 +65,7 @@ class IANAlanguages {
 		 */		
 		function isSignLanguage(items) {
 			let isSign=false
-			for (let i=0; i<items.length; i++)) 
+			for (let i=0; i<items.length; i++))
 				if (items[i].startsWith('Description') && items[i].toLowerCase().includes('sign'))
 					isSign=true
 			
