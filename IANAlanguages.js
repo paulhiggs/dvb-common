@@ -188,7 +188,7 @@ class IANAlanguages {
 	 */
 	isKnownSignLanguage(value){
 		
-		function checkSignLanguane(language) {
+		function checkSignLanguage(language) {
 			if (this.signLanguageRanges.find(range => range["start"]<=language && language<=range["end"]))
 				return this.languageKnown;
 			
