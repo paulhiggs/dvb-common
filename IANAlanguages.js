@@ -79,7 +79,7 @@ class IANAlanguages {
 			let items=entry.replace(/(\r|\t)/gm,"").split("\n");
 			if (isIn(items,"Type: language") || isIn(items,"Type: extlang")) 
 				for (let i=0; i<items.length; i++) {
-					let signingLanguage=isSignLanguage(items))
+					let signingLanguage=isSignLanguage(items)
 					if (items[i].startsWith("Subtag:")) {
  						let val=items[i].split(":")[1].trim();
 						if (isIn(items,"Scope: private-use")) {
