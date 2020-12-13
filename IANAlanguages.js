@@ -37,8 +37,7 @@ class IANAlanguages {
 	 *
 	 * @param {String} languagesData the text of the language data
 	 */
-	/*private function*/ 
-	loadLanguages(languageData) {
+	#loadLanguages(languageData) {
 		
 		/**
 		 * determines if a value is in a set of values 
@@ -71,9 +70,7 @@ class IANAlanguages {
 			
 			return isSign
 		}
-		
-		
-		
+
 		let entries=languageData.split("%%")
 		entries.forEach(entry => {
 			let items=entry.replace(/(\r|\t)/gm,"").split("\n");
@@ -128,7 +125,7 @@ class IANAlanguages {
 
 		fs.readFile(languagesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
-				this.loadLanguages(data);		
+				this.#loadLanguages(data);		
 			}
 			else console.log("error loading languages")
 		}.bind(this));
@@ -154,7 +151,7 @@ class IANAlanguages {
 		fetch(languagesURL)
 			.then(handleErrors)
 			.then(response => response.text())
-			.then(responseText => this.loadLanguages(responseText))
+			.then(responseText => this.#loadLanguages(responseText))
 			.catch(error => console.log("error ("+error+") retrieving "+languagesURL))
 	}
 
@@ -186,23 +183,24 @@ class IANAlanguages {
 	 * @param {String} value The value to check for existance in the list of known signing languages
 	 * @return {integer} indicating the "known" state of the language
 	 */
-	isKnownSignLanguage(value){
+	 
+	#checkSignLanguage(language) {
+		if (this.signLanguageRanges.find(range => range["start"]<=language && language<=range["end"]))
+			return this.languageKnown;
 		
-		function checkSignLanguage(language) {
-			if (this.signLanguageRanges.find(range => range["start"]<=language && language<=range["end"]))
-				return this.languageKnown;
+		if (this.signLanguagesList.find(lang => lang.toLowerCase()==language))
+			return this.languageKnown;
 			
-			if (this.signLanguagesList.find(lang => lang.toLowerCase()==language))
-				return this.languageKnown;
-				
-			return this.languageUnknown;
-		}
-		
+		return this.languageUnknown;
+	}
+	
+	isKnownSignLanguage(value){
+	
 		let lcValue=value.toLowerCase()
-		let res=checkSignLanguage(lcValue)
+		let res=#checkSignLanguage(lcValue)
 		
 		if (res==this.languageUnknown)
-			res=checkSignLanguage("sgn="+lcValue)
+			res=#checkSignLanguage("sgn="+lcValue)
 		
 		return res
 	}	
