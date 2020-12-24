@@ -29,6 +29,7 @@ function hasChild(elem, childElementName) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function addCSTerm(values, CSuri, term, leafNodesOnly=false) {
+	if (term.type()!="element") return
     if (term.name()==="Term") {
 		if (!leafNodesOnly || (leafNodesOnly && !hasChild(term, "Term")))
 			if (term.attr("termID")) 
