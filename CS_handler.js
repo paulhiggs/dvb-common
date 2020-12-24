@@ -1,7 +1,7 @@
 //---------------- CLASSIFICATION SCHEME LOADING ---------------- 
 
 const fs=require("fs")
-const libxml=require("libxmljs")
+const libxml=require('libxmljs2')
 const fetch=require("node-fetch")
 
 /**
