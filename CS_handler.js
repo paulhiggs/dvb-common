@@ -80,7 +80,7 @@ function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
  * @param {String} csURL URL to the classification scheme
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
-function loadCSfromURL(values, csURL, leafNodesOnly=false) { 
+function loadCSfromURL(values, csURL, leafNodesOnly=false) {	
 	console.log("retrieving CS from", csURL, "via fetch()")
 	
 	function handleErrors(response) {
