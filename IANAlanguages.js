@@ -13,7 +13,7 @@ class IANAlanguages {
 	redundantLanguagesList=[];
 
 	LanguagesFileName='language-subtag-registry'
-	LanguagesURL='https://www.iana.org/assignments/language-subtag-registry/'+LanguagesFileName
+	LanguagesURL='https://www.iana.org/assignments/language-subtag-registry/'+this.LanguagesFileName
 		
 	/**
 	 * constructor
