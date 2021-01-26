@@ -144,7 +144,7 @@ module.exports.isURL=function(url) {
  */
 module.exports.isDomainName=function(domain) {
 	if (!domain) return false
-	let DomainNameRegex=new RegExp(/^[a-z\d]+([\-\.]{1}[a-z\d]+)*\.[a-z]{2,5}(:[\d]{1,5})?(\\/.*)?$/, 'i')
+	let DomainNameRegex=new RegExp(/^[a-z\d]+([\-\.]{1}[a-z\d]+)*\.[a-z]{2,5}(:[\d]{1,5})?(\/.*)?$/, 'i')
     return DomainNameRegex.test(domain.trim())
 }
 
