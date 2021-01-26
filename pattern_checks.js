@@ -204,7 +204,7 @@ module.exports.isRTSPURL=function(arg) {
  * @param {string} val the value to check, likely from an Interval@startTime or @endTime attributes
  * @returns {boolean} true if the value is properly formated
  */
-module.exports.validZuluTimeType=function(time) {
+validZuluTimeType=function(time) {
 	if (!time) return false
 	// <pattern value="(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z"/>
 	
@@ -212,6 +212,16 @@ module.exports.validZuluTimeType=function(time) {
 	return ZuluRegex.test(time.trim())
 }
 
+
+/**
+ * checks that the supplied argument conforms to the pattern for a TVA LanguageType 
+ * @param { } languageCode 
+ */
+module.exports.isTVAAudioLanguageType=function(languageCode) {
+	// any language specified should be an XML language
+	const languageRegex=new RegExp(/^[a-z]{1,8}(-[a-z0-9]{1,8})*$/,'i')
+	return languageRegex.test(languageCode)
+}
 
 
 
