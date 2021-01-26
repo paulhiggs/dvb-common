@@ -23,7 +23,7 @@ module.exports.isTAGURI = function (identifier){
  * @returns	{boolean}		true if the argument confirms to the CRID format, else false
  **/
 module.exports.isCRIDURI = function (value) {
-    let CRIDRegex=new RegExp('crid:\\/\\/(.*)\\/(.*)','i')
+    let CRIDRegex=new RegExp('crid://(.*)/(.*)','i')
     return CRIDRegex.test(value.trim)
   /*  
 	const CRIDregex=/[cC][rR][iI][dD]:\/\/(.*)\/(.*)/g;
