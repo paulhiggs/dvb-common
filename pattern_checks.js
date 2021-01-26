@@ -8,11 +8,8 @@
  * @returns {boolean} true if the argment is compliant to a tva:RatioType
  */
 module.exports.isRatioType = function (str) {
-    const ratioRegex=new RegExp(^\d+:\d+$)
+    const ratioRegex=new RegExp(/^\d+:\d+$/)
     return ratioRegex.test(str.trim())
-/*	const ratioRegex=/^\d+:\d+$/
-	let s=str.match(ratioRegex)
-	return s?s[0]===str:false */
 }
 
 
@@ -25,9 +22,6 @@ module.exports.isRatioType = function (str) {
 module.exports.isUTCDateTime = function (str) {
     const UTCregex=new RegExp(/^[\d]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|1\d|2\d|(3[0-1]))T(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z$/)
     return UTCregex.test(str.trim())
-/*	const UTCregex=/^[\d]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|1\d|2\d|(3[0-1]))T(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z$/
-	let s=str.match(UTCregex)
-	return s?s[0]===str:false */
 }
 
 
@@ -57,9 +51,6 @@ module.exports.isHTTPURL=function (arg) {
  module.exports.isISODuration = function (duration) {
     let isoRegex=new RegExp(/^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/)
     return isoRegex.test(duration.trim())
-/*	const isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
-	let s=duration.match(isoRegex);
-	return s?s[0]===duration:false; */
 }
  
  
@@ -73,9 +64,6 @@ module.exports.isHTTPURL=function (arg) {
 module.exports.isDVBLocator = function (locator) {
     let locatorRegex = new RegExp(/^dvb:\/\/[\dA-Fa-f]+\.[\dA-Fa-f]*\.[\dA-Fa-f]+;[\dA-Fa-f]+$/)
     return locatorRegex.test(locator.trim())
-/*	const locatorRegex = /^dvb:\/\/[\dA-Fa-f]+\.[\dA-Fa-f]*\.[\dA-Fa-f]+;[\dA-Fa-f]+$/
-	let s=locator.match(locatorRegex)
-	return s?s[0]===locator:false */
 }
 
 
@@ -144,13 +132,6 @@ module.exports.isURL=function(url) {
 	// genericurl as defined in RFC1738 - https://tools.ietf.org/html/rfc1738
 	
 	let genericURL = new RegExp(/^[-a-z\d@:%._\+~#=]{1,256}\\.[a-z\d()]{1,6}\b([-a-z\d()@:%_\+.~#?&//=]*)$/, 'i')
-/*	
-	let URLregex = new RegExp('^(https?:\\/\\/)?'+ // protocol
-		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-		'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-		'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-		'(\\#[-a-z\\d_]*)?$','i') // fragment locator  */
 	return genericURL.test(url.trim())
 }
 
