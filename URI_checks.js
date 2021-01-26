@@ -24,7 +24,7 @@ module.exports.isTAGURI = function (identifier){
  **/
 module.exports.isCRIDURI = function (value) {
     let CRIDRegex=new RegExp('crid://(.*)/(.*)','i')
-    return CRIDRegex.test(value.trim)
+    return CRIDRegex.test(value.trim())
   /*  
 	const CRIDregex=/[cC][rR][iI][dD]:\/\/(.*)\/(.*)/g;
     var s=value.match(CRIDregex);
