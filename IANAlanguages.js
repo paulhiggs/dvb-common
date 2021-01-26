@@ -11,8 +11,10 @@ class IANAlanguages {
 	languageRanges=[];
 	signLanguagesList=[];
 	redundantLanguagesList=[];
-	
-	
+
+	LanguagesFileName='language-subtag-registry'
+	LanguagesURL='https://www.iana.org/assignments/language-subtag-registry/'+LanguagesFileName
+		
 	/**
 	 * constructor
 	 *
