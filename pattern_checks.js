@@ -204,7 +204,7 @@ module.exports.isRTSPURL=function(arg) {
  * @param {string} val the value to check, likely from an Interval@startTime or @endTime attributes
  * @returns {boolean} true if the value is properly formated
  */
-validZuluTimeType=function(time) {
+module.exports.validZuluTimeType=function(time) {
 	if (!time) return false
 	// <pattern value="(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z"/>
 	
