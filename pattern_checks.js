@@ -196,11 +196,12 @@ module.exports.validZuluTimeType=function(time) {
 
 /**
  * checks that the supplied argument conforms to the pattern for a TVA LanguageType 
- * @param { } languageCode 
+ * @param {String} languageCode 
+ * @param {Boolean} caseSensitive
  */
-module.exports.isTVAAudioLanguageType=function(languageCode) {
+module.exports.isTVAAudioLanguageType=function(languageCode, caseSensitive=true) {
 	// any language specified should be an XML language
-	const languageRegex=new RegExp(/^[a-z]{1,8}(-[a-z0-9]{1,8})*$/,'i')
+	const languageRegex=new RegExp(/^[a-z]{1,8}(-[a-z0-9]{1,8})*$/, caseSensitive?'':'i')
 	return languageRegex.test(languageCode)
 }
 
