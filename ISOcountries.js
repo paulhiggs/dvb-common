@@ -95,19 +95,20 @@ module.exports = class ISOcountries {
 	 * determine if the argument contains a valid ISO 3166 country code
 	 *
 	 * @param {String} countryCode the country code to be checked for validity
+	 * @param {Boolean} caseSensitive ignofe case
 	 * @return {boolean} true if countryCode is known else false
 	 */
-	isISO3166code = function(countryCode) {
-		var found=false;
+	isISO3166code = function(countryCode, caseSensitive=true) {
+		let found=false, countryCode_lc=countryCode.toLowerCase()
 		
 		if (this.use3CharCountries && countryCode.length==3) {
-			if (this.countriesList.find(elem => elem.alpha3==countryCode))
+			if (caseSensitive?this.countriesList.find(elem => elem.alpha3==countryCode):this.countriesList.find(elem => elem.alpha3.toLowerCase()==countryCode_lc))
 				found=true
 		}
 		else if (this.use2CharCountries && countryCode.length==2) {
-			if (this.countriesList.find(elem => elem.alpha2==countryCode))
+			if (caseSensitive?this.countriesList.find(elem => elem.alpha2==countryCode):this.countriesList.find(elem => elem.alpha2.toLowerCase()==countryCode_lc))
 				found=true
 		}
-		return found;
+		return found
 	}
 }
