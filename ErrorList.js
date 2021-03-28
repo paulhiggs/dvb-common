@@ -39,4 +39,6 @@ module.exports = class ErrorList {
         this.messagesWarn.push(errno+this.delim+message);
 		if (key) this.increment(key);
     }
+    numErrors() { return this.messages.length }
+    numWarnings() { return this.messagesWarn.length }
  }
