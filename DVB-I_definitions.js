@@ -97,7 +97,7 @@ module.exports = Object.freeze({
 	RESTART_LINK: "urn:fvc:metadata:cs:HowRelatedCS:2018:restart",
 
 // A177 6.11.11 - Restart Availability
-    RESTART_AVAILBLE: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_available",
+    RESTART_AVAILABLE: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_available",
 	RESTART_CHECK: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_check",
 	RESTART_PENDING: "urn:fvc:metadata:cs:RestartAvailabilityCS:2018:restart_pending",
 
