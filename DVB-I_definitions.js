@@ -44,13 +44,6 @@ module.exports = Object.freeze({
 	EIT_PROGRAMME_CRID_TYPE: "eit-programme-crid",
 	EIT_SERIES_CRID_TYPE: "eit-series-crid",
 
-	DEFAULT_KEYWORD_TYPE: "main",
-	KEYWORD_TYPE_MAIN: "main",
-	KEYWORD_TYPE_OTHER: "other",
-	
-	DEFAULT_GENRE_TYPE: "main",
-	GENRE_TYPE_MAIN: "main",
-	
 	DEFAULT_TITLE_TYPE: "main",
 	TITLE_MAIN_TYPE: "main",
 	TITLE_SECONDARY_TYPE: "secondary",
