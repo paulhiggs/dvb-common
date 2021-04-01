@@ -19,8 +19,8 @@ module.exports = Object.freeze({
 	GENRE_TYPE_MAIN: "main",
 	GENRE_TYPE_SECONDARY: "secondary",
 	GENRE_TYPE_OTHER: "other",
-	DEFAULT_GENRE_TYPE: "main"
-	ALL_GENRE_TYPES: ["main",  "secondary", "other"],
+	DEFAULT_GENRE_TYPE: "main",
+	ALL_GENRE_TYPES: ["main", "secondary", "other"],
 
 	SCAN_TYPES: 	["interlaced", "progressive"],
 	COLOR_TYPES:	["color", "blackAndWhite", "blackAndWhiteAndColor", "colorized"],
