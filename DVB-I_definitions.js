@@ -61,7 +61,8 @@ module.exports = Object.freeze({
 	COLORIMETRY_BT2020_NCL: "urn:dvb:metadata:cs:ColorimetryCS:2020:2.1",
 	COLORIMETRY_BT2100_NCL: "urn:dvb:metadata:cs:ColorimetryCS:2020:3.1",
 	
-	ALLOWED_COLORIMETRY: [this.COLORIMETRY_BT709, this.COLORIMETRY_BT2020_NCL, this.COLORIMETRY_BT2100_NCL],
+	ALLOWED_COLORIMETRY: ["urn:dvb:metadata:cs:ColorimetryCS:2020:1",
+			"urn:dvb:metadata:cs:ColorimetryCS:2020:2.1", "urn:dvb:metadata:cs:ColorimetryCS:2020:3.1"],
 	
 // A177 6.11.2 - Audio Purpose
 	AUDIO_PURPOSE_MAIN: "urn:tva:metadata:cs:AudioPurposeCS:2007:1",

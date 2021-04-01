@@ -18,7 +18,7 @@ module.exports = Object.freeze({
 	TITLE_TYPE_SERIES: "seriesTitle",
 	TITLE_TYPE_EPISOIDE: "episodeTitle",
 
-	DEFAULT_TITLE_TYPE: this.TITLE_TYPE_MAIN,
+	DEFAULT_TITLE_TYPE: "main",
 
 	__zzzDVB_IENDzzz__: null
 });

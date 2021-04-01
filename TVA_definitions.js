@@ -11,16 +11,16 @@ module.exports = Object.freeze({
 	SYNOPSIS_LONG_LENGTH: 1200, 
 	SYNOPSIS_EXTENDED_LABEL: "extended",
 
-	DEFAULT_KEYWORD_TYPE: this.KEYWORD_TYPE_MAIN,
 	KEYWORD_TYPE_MAIN: "main",
 	KEYWORD_TYPE_SECONDARY: "secondary",
 	KEYWORD_TYPE_OTHER: "other",
-	
-	DEFAULT_GENRE_TYPE: this.GENRE_TYPE_MAIN,
+	DEFAULT_KEYWORD_TYPE: "main",
+
 	GENRE_TYPE_MAIN: "main",
 	GENRE_TYPE_SECONDARY: "secondary",
 	GENRE_TYPE_OTHER: "other",
-	ALL_GENRE_TYPES: [this.GENRE_TYPE_MAIN, this.GENRE_TYPE_SECONDARY, this.GENRE_TYPE_OTHER],
+	DEFAULT_GENRE_TYPE: "main"
+	ALL_GENRE_TYPES: ["main",  "secondary", "other"],
 
 	SCAN_TYPES: 	["interlaced", "progressive"],
 	COLOR_TYPES:	["color", "blackAndWhite", "blackAndWhiteAndColor", "colorized"],
