@@ -33,7 +33,7 @@ function addCSTerm(values, CSuri, term, leafNodesOnly=false) {
     if (term.name()==="Term") {
 		if (!leafNodesOnly || (leafNodesOnly && !hasChild(term, "Term")))
 			if (term.attr("termID")) 
-				values.push(CSuri+":"+term.attr("termID").value())
+				values.push(`${CSuri}:${term.attr("termID").value()}`)
         var st=0, subTerm
         while (subTerm=term.child(st++))
             addCSTerm(values, CSuri, subTerm, leafNodesOnly)
@@ -64,7 +64,7 @@ function loadClassificationScheme(values, xmlCS, leafNodesOnly=false) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
-	console.log("reading CS from", classificationScheme);
+	console.log(`reading CS from m${classificationScheme}`)
     fs.readFile(classificationScheme, {encoding: "utf-8"}, function(err,data){
         if (!err) 
 			loadClassificationScheme(values, libxml.parseXmlString(data.replace(/(\r\n|\n|\r|\t)/gm,"")), leafNodesOnly);
@@ -81,7 +81,7 @@ function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function loadCSfromURL(values, csURL, leafNodesOnly=false) {	
-	console.log("retrieving CS from", csURL, "via fetch()")
+	console.log(`retrieving CS from ${csURL} via fetch()`)
 	
 	function handleErrors(response) {
 		if (!response.ok) {
@@ -94,7 +94,7 @@ function loadCSfromURL(values, csURL, leafNodesOnly=false) {
 		.then(handleErrors)
 		.then(response => response.text())
 		.then(strXML => loadClassificationScheme(values, libxml.parseXmlString(strXML), leafNodesOnly))
-		.catch(error => console.log("error ("+error+") retrieving "+csURL))
+		.catch(error => console.log(`error (${error}) retrieving ${csURL}`))
 }
 
 

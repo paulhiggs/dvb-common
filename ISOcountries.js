@@ -48,7 +48,7 @@ module.exports = class ISOcountries {
 	 * @param {boolean} purge  erase the existing values before loading new
 	 */
 	loadCountriesFromFile = function(countriesFile, purge=false) {
-		console.log("reading countries from", countriesFile);
+		console.log(`reading countries from ${countriesFile}`)
 		if (purge) this.reset();
 		fs.readFile(countriesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
@@ -66,7 +66,7 @@ module.exports = class ISOcountries {
 	 * @param {boolean} purge  erase the existing values before loading new
 	 */
 	loadCountriesFromURL = function(countriesURL, purge=false) {
-		console.log("retrieving countries from", countriesURL, "using fetch()")
+		console.log(`retrieving countries from ${countriesURL} using fetch()`)
 		if (purge) this.reset();
 
 		function handleErrors(response) {
@@ -80,7 +80,7 @@ module.exports = class ISOcountries {
 			.then(handleErrors)
 			.then(response => response.text())
 			.then(responseText => this.countriesList=loadCountries(responseText))
-			.catch(error => console.log("error ("+error+") retrieving "+countriesURL))
+			.catch(error => console.log(`error (${error}) retrieving ${countriesURL}`))
 	}
 
 	reset() {
