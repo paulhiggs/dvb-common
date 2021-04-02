@@ -13,7 +13,7 @@ const fetch=require("node-fetch")
  */
 function hasChild(elem, childElementName) {
 	if (!elem) return false
-	return childElementName.childNodes().find(elem => elem.type=='element' && elem.name==childElementName) != undefined
+	return elem.childNodes().find(el => el.type()=='element' && el.name()==childElementName) != undefined
 /*	let ch=0, c
 	while (c=elem.child(ch++))
 		if (c.type()=="element" && c.name()===childElementName)
