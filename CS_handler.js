@@ -12,12 +12,14 @@ const fetch=require("node-fetch")
  *& @returns {boolean} true of the element contains the named child element(s) otherwise false
  */
 function hasChild(elem, childElementName) {
-	let ch=0, c
+	if (!elem) return false
+	return childElementName.childNodes().find(elem => elem.type=='element' && elem.name==childElementName) != undefined
+/*	let ch=0, c
 	while (c=elem.child(ch++))
-		if (c.type()=="element" && c.name()==="Term")
+		if (c.type()=="element" && c.name()===childElementName)
 			return true
 	
-	return false
+	return false */
 }
 
 /**
