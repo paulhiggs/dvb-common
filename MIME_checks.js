@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 const JPEG_MIME = "image/jpeg", 
       PNG_MIME =  "image/png";
 	  
@@ -8,8 +10,8 @@ const JPEG_MIME = "image/jpeg",
  * @return {boolean} true if the MIME type represents a JPEG image, otherwise false
  */
 module.exports.isJPEGmime = function (val) {
-	return val==JPEG_MIME
-}
+	return val==JPEG_MIME;
+};
 
 /**
  * determines if the value is a valid PNG MIME type
@@ -18,5 +20,5 @@ module.exports.isJPEGmime = function (val) {
  * @return {boolean} true if the MIME type represents a PNG image, otherwise false
  */
 module.exports.isPNGmime = function (val) {
-	return val==PNG_MIME 
-}
+	return val==PNG_MIME;
+};

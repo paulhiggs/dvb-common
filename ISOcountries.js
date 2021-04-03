@@ -1,6 +1,7 @@
+/*jshint esversion: 6 */
 
-const fetch=require('node-fetch')
-const fs=require("fs")
+const fetch=require('node-fetch');
+const fs=require("fs");
 
 
 /**
@@ -13,7 +14,7 @@ function loadCountries(countryData) {
 
 	return JSON.parse(countryData, function (key, value) {
 		if (key == "numeric") {
-			return new Number(value);
+			return Number(value);
 		} else if (key == "alpha2") {
 			if (value.length!=2) return "**"; else return value;
 		} else if (key == "alpha3") {
@@ -47,8 +48,8 @@ module.exports = class ISOcountries {
 	 * @param {String} countriesFile the file name to load
 	 * @param {boolean} purge  erase the existing values before loading new
 	 */
-	loadCountriesFromFile = function(countriesFile, purge=false) {
-		console.log(`reading countries from ${countriesFile}`)
+	loadCountriesFromFile(countriesFile, purge=false) {
+		console.log(`reading countries from ${countriesFile}`);
 		if (purge) this.reset();
 		fs.readFile(countriesFile, {encoding: "utf-8"}, function(err,data){
 			if (!err) {
@@ -65,22 +66,22 @@ module.exports = class ISOcountries {
 	 * @param {String} countriesURL the URL to the file to load
 	 * @param {boolean} purge  erase the existing values before loading new
 	 */
-	loadCountriesFromURL = function(countriesURL, purge=false) {
-		console.log(`retrieving countries from ${countriesURL} using fetch()`)
+	loadCountriesFromURL(countriesURL, purge=false) {
+		console.log(`retrieving countries from ${countriesURL} using fetch()`);
 		if (purge) this.reset();
 
 		function handleErrors(response) {
 			if (!response.ok) {
-				throw Error(response.statusText)
+				throw Error(response.statusText);
 			}
-			return response
+			return response;
 		}
 		
 		fetch(countriesURL)
 			.then(handleErrors)
 			.then(response => response.text())
 			.then(responseText => this.countriesList=loadCountries(responseText))
-			.catch(error => console.log(`error (${error}) retrieving ${countriesURL}`))
+			.catch(error => console.log(`error (${error}) retrieving ${countriesURL}`));
 	}
 
 	reset() {
@@ -98,17 +99,17 @@ module.exports = class ISOcountries {
 	 * @param {Boolean} caseSensitive ignofe case
 	 * @return {boolean} true if countryCode is known else false
 	 */
-	isISO3166code = function(countryCode, caseSensitive=true) {
-		let found=false, countryCode_lc=countryCode.toLowerCase()
+	isISO3166code(countryCode, caseSensitive=true) {
+		let found=false, countryCode_lc=countryCode.toLowerCase();
 		
 		if (this.use3CharCountries && countryCode.length==3) {
 			if (caseSensitive?this.countriesList.find(elem => elem.alpha3==countryCode):this.countriesList.find(elem => elem.alpha3.toLowerCase()==countryCode_lc))
-				found=true
+				found=true;
 		}
 		else if (this.use2CharCountries && countryCode.length==2) {
 			if (caseSensitive?this.countriesList.find(elem => elem.alpha2==countryCode):this.countriesList.find(elem => elem.alpha2.toLowerCase()==countryCode_lc))
-				found=true
+				found=true;
 		}
-		return found
+		return found;
 	}
-}
+};

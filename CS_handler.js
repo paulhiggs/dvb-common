@@ -1,8 +1,10 @@
+/*jshint esversion: 6 */
+
 //---------------- CLASSIFICATION SCHEME LOADING ---------------- 
 
-const fs=require("fs")
-const libxml=require('libxmljs2')
-const fetch=require("node-fetch")
+const fs=require("fs");
+const libxml=require('libxmljs2');
+const fetch=require("node-fetch");
 
 /**
  * check if the element contains the named child element
@@ -12,8 +14,8 @@ const fetch=require("node-fetch")
  *& @returns {boolean} true of the element contains the named child element(s) otherwise false
  */
 function hasChild(elem, childElementName) {
-	if (!elem) return false
-	return elem.childNodes().find(el => el.type()=='element' && el.name()==childElementName) != undefined
+	if (!elem) return false;
+	return elem.childNodes().find(el => el.type()=='element' && el.name()==childElementName) != undefined;
 /*	let ch=0, c
 	while (c=elem.child(ch++))
 		if (c.type()=="element" && c.name()===childElementName)
@@ -31,14 +33,14 @@ function hasChild(elem, childElementName) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function addCSTerm(values, CSuri, term, leafNodesOnly=false) {
-	if (term.type()!="element") return
+	if (term.type()!="element") return;
     if (term.name()==="Term") {
 		if (!leafNodesOnly || (leafNodesOnly && !hasChild(term, "Term")))
 			if (term.attr("termID")) 
-				values.push(`${CSuri}:${term.attr("termID").value()}`)
-        var st=0, subTerm
-        while (subTerm=term.child(st++))
-            addCSTerm(values, CSuri, subTerm, leafNodesOnly)
+				values.push(`${CSuri}:${term.attr("termID").value()}`);
+        var st=0, subTerm;
+        while ((subTerm=term.child(st++))!=null)
+            addCSTerm(values, CSuri, subTerm, leafNodesOnly);
     }
 }
 
@@ -50,12 +52,12 @@ function addCSTerm(values, CSuri, term, leafNodesOnly=false) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function loadClassificationScheme(values, xmlCS, leafNodesOnly=false) {
-	if (!xmlCS) return
-	let CSnamespace = xmlCS.root().attr("uri")
-	if (!CSnamespace) return
-	var t=0, term
-	while (term=xmlCS.root().child(t++))
-		addCSTerm(values, CSnamespace.value(), term, leafNodesOnly)
+	if (!xmlCS) return;
+	let CSnamespace = xmlCS.root().attr("uri");
+	if (!CSnamespace) return;
+	var t=0, term;
+	while ((term=xmlCS.root().child(t++))!=null)
+		addCSTerm(values, CSnamespace.value(), term, leafNodesOnly);
 }
 
 /**
@@ -66,7 +68,7 @@ function loadClassificationScheme(values, xmlCS, leafNodesOnly=false) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
-	console.log(`reading CS from m${classificationScheme}`)
+	console.log(`reading CS from m${classificationScheme}`);
     fs.readFile(classificationScheme, {encoding: "utf-8"}, function(err,data){
         if (!err) 
 			loadClassificationScheme(values, libxml.parseXmlString(data.replace(/(\r\n|\n|\r|\t)/gm,"")), leafNodesOnly);
@@ -83,20 +85,20 @@ function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
 function loadCSfromURL(values, csURL, leafNodesOnly=false) {	
-	console.log(`retrieving CS from ${csURL} via fetch()`)
+	console.log(`retrieving CS from ${csURL} via fetch()`);
 	
 	function handleErrors(response) {
 		if (!response.ok) {
-			throw Error(response.statusText)
+			throw Error(response.statusText);
 		}
-		return response
+		return response;
 	}
 	
 	fetch(csURL)
 		.then(handleErrors)
 		.then(response => response.text())
 		.then(strXML => loadClassificationScheme(values, libxml.parseXmlString(strXML), leafNodesOnly))
-		.catch(error => console.log(`error (${error}) retrieving ${csURL}`))
+		.catch(error => console.log(`error (${error}) retrieving ${csURL}`));
 }
 
 
@@ -112,7 +114,7 @@ function loadCSfromURL(values, csURL, leafNodesOnly=false) {
  */ 
 module.exports.loadCS = function (values, useURL, CSfilename, CSurl, leafNodesOnly=false) {
 	if (useURL)
-		loadCSfromURL(values, CSurl, leafNodesOnly)
-	else loadCSfromFile(values, CSfilename, leafNodesOnly)
-} 
+		loadCSfromURL(values, CSurl, leafNodesOnly);
+	else loadCSfromFile(values, CSfilename, leafNodesOnly);
+};
 //--------------------------------------------------------------- 

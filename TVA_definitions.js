@@ -1,8 +1,9 @@
+/*jshint esversion: 6 */
 
 module.exports = Object.freeze({
 
 	SYNOPSIS_BRIEF_LABEL: "brief",
-	SYNOPSIS_SHORT_LENGTH: 30,
+	SYNOPSIS_BRIEF_LENGTH: 30,
 	SYNOPSIS_SHORT_LABEL: "short",
 	SYNOPSIS_SHORT_LENGTH: 90,
     SYNOPSIS_MEDIUM_LABEL: "medium", 

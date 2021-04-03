@@ -1,12 +1,17 @@
+/*jshint esversion: 6 */
 /**
  * Manages errors and warnings for the application
  * 
  */
 module.exports = class ErrorList {
-    counts=[]; messages=[]; countsWarn=[]; messagesWarn=[];
-    
-	delim='#';
-	
+      
+    constructor() {
+        this.counts=[]; 
+        this.messages=[]; 
+        this.countsWarn=[]; 
+        this.messagesWarn=[];
+        this.delim='#';
+    }
     increment(key) {
         if (this.counts[key]===undefined)
             this.set(key,1);
@@ -39,6 +44,6 @@ module.exports = class ErrorList {
         this.messagesWarn.push(errno+this.delim+message);
 		if (key) this.increment(key);
     }
-    numErrors() { return this.messages.length }
-    numWarnings() { return this.messagesWarn.length }
- }
+    numErrors() { return this.messages.length; }
+    numWarnings() { return this.messagesWarn.length; }
+ };

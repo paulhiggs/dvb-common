@@ -1,25 +1,16 @@
-const fetch=require('node-fetch')
-const fs=require('fs')
+/*jshint esversion: 6 */
+
+const fetch=require('node-fetch');
+const fs=require('fs');
 
 class IANAlanguages {
 
-	languageUnknown=0;
-	languageKnown=1;
-	languageRedundant=2;
-
-	languagesList=[];
-	languageRanges=[];
-	signLanguagesList=[];
-	redundantLanguagesList=[];
-
-	LanguagesFileName='language-subtag-registry'
-	LanguagesURL='https://www.iana.org/assignments/language-subtag-registry/'+this.LanguagesFileName
-		
-	/**
-	 * constructor
-	 *
-	 */
 	constructor() {
+		this.languageUnknown=0;
+		this.languageKnown=1;
+		this.languageRedundant=2;
+		this.LanguagesFileName='language-subtag-registry';
+		this.LanguagesURL='https://www.iana.org/assignments/language-subtag-registry/'+this.LanguagesFileName;
 		this.empty();
 	}
 
@@ -47,11 +38,11 @@ class IANAlanguages {
 		 * @return {boolean} if value is in the set of values
 		 */
 		function isIn(values, value){
-			if (typeof(values)=="string")
+			if (typeof(values)=="string" || values instanceof String)
 				return values==value;
 		   
 			if (Array.isArray(values)) 	
-				return values.includes(value)
+				return values.includes(value);
 			
 			return false;
 		}	
@@ -63,39 +54,39 @@ class IANAlanguages {
 		 * @return {boolean} true if the language subtag is a sign language
 		 */		
 		function isSignLanguage(items) {
-			let isSign=false
+			let isSign=false;
 			for (let i=0; i<items.length; i++) 
 				if (items[i].startsWith('Description') && items[i].toLowerCase().includes('sign'))
-					isSign=true
+					isSign=true;
 			
-			return isSign
+			return isSign;
 		}
 
-		let entries=languageData.split("%%")
+		let entries=languageData.split("%%");
 		entries.forEach(entry => {
 			let items=entry.replace(/(\r|\t)/gm,"").split("\n");
 			if (isIn(items,"Type: language") || isIn(items,"Type: extlang")) 
 				for (let i=0; i<items.length; i++) {
-					let signingLanguage=isSignLanguage(items) 
+					let signingLanguage=isSignLanguage(items);
 					if (items[i].startsWith("Subtag:")) {
  						let val=items[i].split(":")[1].trim();
 						if (isIn(items,"Scope: private-use")) {
 							if (val.indexOf("..")<0) 
-								this.languagesList.push(val)
+								this.languagesList.push(val);
 							else {
 								let range=val.split("..");
 								if (range[0].length == range[1].length) {
 									if (range[0]<range[1]) 
-										this.languageRanges.push({"start":range[0], "end":range[1]})
-									
+										this.languageRanges.push({"start":range[0], "end":range[1]});
 									else 
-										this.languageRanges.push({"start":range[1], "end":range[0]})
+										this.languageRanges.push({"start":range[1], "end":range[0]});
 								}
 							}
 						}							
 						else {
-							this.languagesList.push(val)
-							if (signingLanguage) this.signLanguagesList.push(val)
+							this.languagesList.push(val);
+							if (signingLanguage) 
+								this.signLanguagesList.push(val);
 						}
 					}
 				}
@@ -123,7 +114,7 @@ class IANAlanguages {
 			if (!err) {
 				this.loadLanguages(data);		
 			}
-			else console.log("error loading languages")
+			else console.log("error loading languages");
 		}.bind(this));
 	}
 
@@ -134,21 +125,21 @@ class IANAlanguages {
 	 * @param {boolean} purge  erase the existing values before loading new
 	 */
 	loadLanguagesFromURL(languagesURL, purge=false) {
-		console.log("retrieving languages from", languagesURL, "using fetch()")
+		console.log("retrieving languages from", languagesURL, "using fetch()");
 		if (purge) this.empty();
 		
 		function handleErrors(response) {
 			if (!response.ok) {
-				throw Error(response.statusText)
+				throw Error(response.statusText);
 			}
-			return response
+			return response;
 		}
 		
 		fetch(languagesURL)
 			.then(handleErrors)
 			.then(response => response.text())
 			.then(responseText => this.loadLanguages(responseText))
-			.catch(error => console.log("error ("+error+") retrieving "+languagesURL))
+			.catch(error => console.log("error ("+error+") retrieving "+languagesURL));
 	}
 
 	
@@ -161,7 +152,7 @@ class IANAlanguages {
 	isKnown(value){
 		let lcValue=value.toLowerCase();
 		
-		if (this.languageRanges.find(range => range["start"]<=value && value<=range["end"]))
+		if (this.languageRanges.find(range => range.start<=value && value<=range.end))
 			return this.languageKnown;
 		
 		if (this.languagesList.find(lang => lang.toLowerCase()==lcValue))
@@ -188,13 +179,13 @@ class IANAlanguages {
 	}
 	
 	isKnownSignLanguage(value){
-		let lcValue=value.toLowerCase()
-		let res=this.checkSignLanguage(lcValue)
+		let lcValue=value.toLowerCase();
+		let res=this.checkSignLanguage(lcValue);
 		
 		if (res==this.languageUnknown)
-			res=this.checkSignLanguage("sgn-"+lcValue)
+			res=this.checkSignLanguage("sgn-"+lcValue);
 		
-		return res
+		return res;
 	}	
 }
 

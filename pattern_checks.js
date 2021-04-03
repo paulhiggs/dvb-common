@@ -1,5 +1,7 @@
+/*jshint esversion: 6 */
+
 // pattern_checks.js
-	  
+  
 
 /**
  * checks if the argument complies to the TV Anytime defintion of RatioType
@@ -8,9 +10,9 @@
  * @returns {boolean} true if the argment is compliant to a tva:RatioType
  */
 module.exports.isRatioType = function (str) {
-    const ratioRegex=new RegExp(/^\d+:\d+$/)
-    return ratioRegex.test(str.trim())
-}
+    const ratioRegex=new RegExp(/^\d+:\d+$/);
+    return ratioRegex.test(str.trim());
+};
 
 
 /**
@@ -20,9 +22,9 @@ module.exports.isRatioType = function (str) {
  * @returns {boolean}  true if the argment is formatted according to UTC ("Zulu") time
  */
 module.exports.isUTCDateTime = function (str) {
-    const UTCregex=new RegExp(/^[\d]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|1\d|2\d|(3[0-1]))T(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z$/)
-    return UTCregex.test(str.trim())
-}
+    const UTCregex=new RegExp(/^[\d]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|1\d|2\d|(3[0-1]))T(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z$/);
+    return UTCregex.test(str.trim());
+};
 
 
 /**
@@ -34,8 +36,8 @@ module.exports.isUTCDateTime = function (str) {
  * see RFC 3986 - https://tools.ietf.org/html/rfc3986
  */
 module.exports.isHTTPURL=function (arg) {
-	return this.isURI(arg, '(https?:\\/\\/)')
-}
+	return this.isURI(arg, '(https?:\\/\\/)');
+};
 
 
 /**
@@ -50,9 +52,9 @@ module.exports.isHTTPURL=function (arg) {
 		'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
 		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
 		'(\\?[\\/?;&a-z\\d%_.~+=-]*)?'+ // query string
-		'(\\#[\\/?-a-z\\d_]*)?$','i') // fragment locator
-	return pattern.test(arg)
-}
+		'(\\#[\\/?-a-z\\d_]*)?$','i'); // fragment locator
+	return pattern.test(arg);
+};
 
 
 /**
@@ -62,9 +64,9 @@ module.exports.isHTTPURL=function (arg) {
  * @returns {boolean}  true if the argment is formatted according to UTC ("Zulu") time
  */
  module.exports.isISODuration = function (duration) {
-    let isoRegex=new RegExp(/^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/)
-    return isoRegex.test(duration.trim())
-}
+    let isoRegex=new RegExp(/^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/);
+    return isoRegex.test(duration.trim());
+};
  
  
 /**
@@ -75,9 +77,9 @@ module.exports.isHTTPURL=function (arg) {
  * @returns {boolean}  true is the argment is formatted as a DVB locator
  */
 module.exports.isDVBLocator = function (locator) {
-    let locatorRegex = new RegExp(/^dvb:\/\/[\dA-Fa-f]+\.[\dA-Fa-f]*\.[\dA-Fa-f]+;[\dA-Fa-f]+$/)
-    return locatorRegex.test(locator.trim())
-}
+    let locatorRegex = new RegExp(/^dvb:\/\/[\dA-Fa-f]+\.[\dA-Fa-f]*\.[\dA-Fa-f]+;[\dA-Fa-f]+$/);
+    return locatorRegex.test(locator.trim());
+};
 
 
 /**
@@ -86,11 +88,11 @@ module.exports.isDVBLocator = function (locator) {
  * @returns {boolean} true if the postcode argument is a valid postcode , otherwise false 
  */
 module.exports.isPostcode = function(postcode) {
-	if (!postcode) return false
+	if (!postcode) return false;
 
-	let postcodeRegex=new RegExp(/[a-z\d]+([\- ][a-z\d]+)?$/, 'i')
-	return postcodeRegex.test(postcode.trim())
-}
+	let postcodeRegex=new RegExp(/[a-z\d]+([\- ][a-z\d]+)?$/, 'i');
+	return postcodeRegex.test(postcode.trim());
+};
 
 
 /**
@@ -99,13 +101,13 @@ module.exports.isPostcode = function(postcode) {
  * @returns {boolean} true if the postcode argument is a valid wildcarded postcode , otherwise false 
  */
  module.exports.isWildcardPostcode = function(postcode) {
-	if (!postcode) return false
+	if (!postcode) return false;
 
-	let WildcardFirstRegex=new RegExp(/^(\*[a-z\\d]*[\- ]?[a-z\d]+)/, 'i')
-	let WildcardMiddleRegex=new RegExp(/^(([a-z\d]+\*[\- ]?[a-z\d]+)|([a-z\d]+[\- ]?\\*[a-z\d]+))$/, 'i')
-	let WildcardEndRegex=new RegExp(/^([a-z\d]+[\- ]?[a-z\d]*\*)$/, 'i')
-	return WildcardEndRegex.test(postcode.trim()) || WildcardMiddleRegex.test(postcode.trim())|| WildcardFirstRegex.test(postcode.trim())
-}
+	let WildcardFirstRegex=new RegExp(/^(\*[a-z\\d]*[\- ]?[a-z\d]+)/, 'i');
+	let WildcardMiddleRegex=new RegExp(/^(([a-z\d]+\*[\- ]?[a-z\d]+)|([a-z\d]+[\- ]?\\*[a-z\d]+))$/, 'i');
+	let WildcardEndRegex=new RegExp(/^([a-z\d]+[\- ]?[a-z\d]*\*)$/, 'i');
+	return WildcardEndRegex.test(postcode.trim()) || WildcardMiddleRegex.test(postcode.trim())|| WildcardFirstRegex.test(postcode.trim());
+};
 
 
 /**
@@ -115,9 +117,9 @@ module.exports.isPostcode = function(postcode) {
  * @returns {boolean} true if the signalled extensionName is in the specification defined format, else false
  */
 module.exports.validExtensionName=function(ext) {
-	let ExtensionRegex=new RegExp(/^[a-z\d][a-z\d:\-/\.]*[a-z\d]$/,'i')
-	return ExtensionRegex.test(ext.trim())
-}
+	let ExtensionRegex=new RegExp(/^[a-z\d][a-z\d:\-/\.]*[a-z\d]$/,'i');
+	return ExtensionRegex.test(ext.trim());
+};
 
 
 /**
@@ -128,11 +130,11 @@ module.exports.validExtensionName=function(ext) {
  * @returns {boolean} true if the signalled frameRate is a valid TV-Anytime FrameRateType, else false
  */
 module.exports.validFrameRate=function(rate) {
-	let FrameRateRegex1=new RegExp(/^\d{1,3}(\.\d{1,3})?$/)
-	let FrameRateRegex2=new RegExp(/^\d{1,3}\/1\.001$/)
+	let FrameRateRegex1=new RegExp(/^\d{1,3}(\.\d{1,3})?$/);
+	let FrameRateRegex2=new RegExp(/^\d{1,3}\/1\.001$/);
 	
-	return FrameRateRegex1.test(rate.trim()) || FrameRateRegex2.test(rate.trim())
-}
+	return FrameRateRegex1.test(rate.trim()) || FrameRateRegex2.test(rate.trim());
+};
 
 
 /**
@@ -144,9 +146,9 @@ module.exports.validFrameRate=function(rate) {
 module.exports.isURL=function(url) {
 	// genericurl as defined in RFC1738 - https://tools.ietf.org/html/rfc1738
 	
-	let genericURL = new RegExp(/^[-a-z\d@:%._\+~#=]{1,256}\\.[a-z\d()]{1,6}\b([-a-z\d()@:%_\+.~#?&//=]*)$/, 'i')
-	return genericURL.test(url.trim())
-}
+	let genericURL = new RegExp(/^[-a-z\d@:%._\+~#=]{1,256}\\.[a-z\d()]{1,6}\b([-a-z\d()@:%_\+.~#?&//=]*)$/, 'i');
+	return genericURL.test(url.trim());
+};
 
 
 /**
@@ -156,10 +158,10 @@ module.exports.isURL=function(url) {
  * @returns {boolean} true if the argument is a domain name
  */
 module.exports.isDomainName=function(domain) {
-	if (!domain) return false
-	let DomainNameRegex=new RegExp(/^[a-z\d]+([\-\.]{1}[a-z\d]+)*\.[a-z]{2,5}(:[\d]{1,5})?(\/.*)?$/, 'i')
-    return DomainNameRegex.test(domain.trim())
-}
+	if (!domain) return false;
+	let DomainNameRegex=new RegExp(/^[a-z\d]+([\-\.]{1}[a-z\d]+)*\.[a-z]{2,5}(:[\d]{1,5})?(\/.*)?$/, 'i');
+    return DomainNameRegex.test(domain.trim());
+};
 
 
 
@@ -173,9 +175,9 @@ module.exports.isDomainName=function(domain) {
 module.exports.isRTSPURL=function(arg) {
 	if (!(arg && isURL(arg))) return false;
 	
-	let RTSPRegex=new RegExp(/^rtsp:\/\/.*$/, 'i')
-	return RTSPRegex.test(arg.trim())
-}
+	let RTSPRegex=new RegExp(/^rtsp:\/\/.*$/, 'i');
+	return RTSPRegex.test(arg.trim());
+};
 
 
 /**
@@ -185,11 +187,11 @@ module.exports.isRTSPURL=function(arg) {
  * @returns {boolean} true if the value is properly formated
  */
  module.exports.validServiceDaysList=function(daysList) {
-	if (!daysList) return false
+	if (!daysList) return false;
 	// list of values 1-7 separeted by spaces
-	let DaysListRegex=new RegExp(/^([1-7]\s+)*[1-7]$/)
-	return DaysListRegex.test(daysList.trim())
-}
+	let DaysListRegex=new RegExp(/^([1-7]\s+)*[1-7]$/);
+	return DaysListRegex.test(daysList.trim());
+};
 
 
 /**
@@ -199,12 +201,12 @@ module.exports.isRTSPURL=function(arg) {
  * @returns {boolean} true if the value is properly formated
  */
 module.exports.validZuluTimeType=function(time) {
-	if (!time) return false
+	if (!time) return false;
 	// <pattern value="(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z"/>
 	
-	let ZuluRegex=new RegExp(/^(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z$/)
-	return ZuluRegex.test(time.trim())
-}
+	let ZuluRegex=new RegExp(/^(([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?|(24:00:00(\.0+)?))Z$/);
+	return ZuluRegex.test(time.trim());
+};
 
 
 /**
@@ -214,9 +216,9 @@ module.exports.validZuluTimeType=function(time) {
  */
 module.exports.isTVAAudioLanguageType=function(languageCode, caseSensitive=true) {
 	// any language specified should be an XML language
-	const languageRegex=new RegExp(/^[a-z]{1,8}(-[a-z0-9]{1,8})*$/, caseSensitive?'':'i')
-	return languageRegex.test(languageCode)
-}
+	const languageRegex=new RegExp(/^[a-z]{1,8}(-[a-z0-9]{1,8})*$/, caseSensitive?'':'i');
+	return languageRegex.test(languageCode);
+};
 
 
 
