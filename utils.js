@@ -31,19 +31,31 @@ module.exports.xPathM = function (SCHEMA_PREFIX, elementNames) {
 
 
 /**
- * determines if a value is in a set of values - simular to 
+ * determines if a value is in a set of values 
  *
  * @param {String or Array} values The set of values to check existance in
- * @param {String} value           The value to check for existance
- * @returns {boolean} true if value is in the set of values
+ * @param {String} value The value to check for existance
+ * @return {boolean} if value is in the set of values
  */
-module.exports.isIn = function (values, value, dbg=false) {
-    if (dbg) console.log(`checking ${value} against ${values.length} choices`);
-    if (typeof values=="string" || values instanceof String)
-        return values==value;
+function isIn(values, value, caseSensitive=true){
+	let vlc=value.toLowerCase();
+    if (typeof(values)=="string")
+        return caseSensitive? values==value : values.toLowerCase()==vlc;
    
-    if (Array.isArray(values)) 	
-		return values.includes(value);
+    if (typeof(values)=="object") 	
+		return caseSensitive? values.includes(value) : (values.find(element => element.toLowerCase()==vlc) != undefined);
     
     return false;
-};
+}
+
+
+/**
+ * determines if a value is in a set of values using a case insensitive comparison
+ *
+ * @param {String or Array} values The set of values to check existance in
+ * @param {String} value The value to check for existance
+ * @return {boolean} if value is in the set of values
+ */
+function isIni(values, value){
+	return isIn(values, value, false);
+}
