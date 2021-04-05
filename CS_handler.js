@@ -1,10 +1,10 @@
-/*jshint esversion: 6 */
+/*jshint esversion: 8 */
 
 //---------------- CLASSIFICATION SCHEME LOADING ---------------- 
 
 const fs=require("fs");
 const libxml=require('libxmljs2');
-const fetch=require("node-fetch");
+const sfetch = require('sync-fetch');
 
 /**
  * check if the element contains the named child element
@@ -16,12 +16,6 @@ const fetch=require("node-fetch");
 function hasChild(elem, childElementName) {
 	if (!elem) return false;
 	return elem.childNodes().find(el => el.type()=='element' && el.name()==childElementName) != undefined;
-/*	let ch=0, c
-	while (c=elem.child(ch++))
-		if (c.type()=="element" && c.name()===childElementName)
-			return true
-	
-	return false */
 }
 
 /**
@@ -67,13 +61,23 @@ function loadClassificationScheme(values, xmlCS, leafNodesOnly=false) {
  * @param {String} classificationScheme the filename of the classification scheme
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
-function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
-	console.log(`reading CS from m${classificationScheme}`);
-    fs.readFile(classificationScheme, {encoding: "utf-8"}, function(err,data){
-        if (!err) 
+function loadCSfromFile(values, classificationScheme, leafNodesOnly, async) {
+	console.log(`reading CS from ${classificationScheme}`);
+	if (async) 
+		fs.readFile(classificationScheme, {encoding: "utf-8"}, function(err,data){
+			if (!err) 
+				loadClassificationScheme(values, libxml.parseXmlString(data.replace(/(\r\n|\n|\r|\t)/gm,"")), leafNodesOnly);
+			else console.log(err);
+		});
+	else {
+		try {
+			let data=fs.readFileSync(classificationScheme, {encoding: "utf-8"});
 			loadClassificationScheme(values, libxml.parseXmlString(data.replace(/(\r\n|\n|\r|\t)/gm,"")), leafNodesOnly);
-		else console.log(err);
-    });
+		}
+		catch (error) {
+			console.log(error);
+		}	
+	}
 }
 
 
@@ -84,25 +88,35 @@ function loadCSfromFile(values, classificationScheme, leafNodesOnly=false) {
  * @param {String} csURL URL to the classification scheme
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */
-function loadCSfromURL(values, csURL, leafNodesOnly=false) {	
-	console.log(`retrieving CS from ${csURL} via fetch()`);
-	
-	function handleErrors(response) {
-		if (!response.ok) {
-			throw Error(response.statusText);
+function loadCSfromURL(values, csURL, leafNodesOnly, async) {	
+	if (async) {
+		/* jshint -W082 */
+		function handleErrors(response) {
+			if (!response.ok) {
+				throw Error(response.statusText);
+			}
+			return response;
 		}
-		return response;
+		/* jshint +W082*/
+		fetch(csURL)
+			.then(handleErrors)
+			.then(response => response.text())
+			.then(strXML => loadClassificationScheme(values, libxml.parseXmlString(strXML), leafNodesOnly))
+			.catch(error => console.log(`error (${error}) retrieving ${csURL}`));
 	}
-	
-	fetch(csURL)
-		.then(handleErrors)
-		.then(response => response.text())
-		.then(strXML => loadClassificationScheme(values, libxml.parseXmlString(strXML), leafNodesOnly))
-		.catch(error => console.log(`error (${error}) retrieving ${csURL}`));
+	else {
+		try {
+			console.log(`retrieving CS from ${csURL} via sync-fetch()`);
+			const strXML = sfetch(csURL).text();
+			loadClassificationScheme(values, libxml.parseXmlString(strXML), leafNodesOnly);
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 
- 
 /**
  * loads classification scheme values from either a local file or an URL based location
  *
@@ -112,9 +126,30 @@ function loadCSfromURL(values, csURL, leafNodesOnly=false) {
  * @param {String} CSurl          URL to the classification scheme
  * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
  */ 
-module.exports.loadCS = function (values, useURL, CSfilename, CSurl, leafNodesOnly=false) {
+module.exports.loadCS = function (values, useURL, CSfilename, CSurl, leafNodesOnly=false, async=true) {
 	if (useURL)
-		loadCSfromURL(values, CSurl, leafNodesOnly);
-	else loadCSfromFile(values, CSfilename, leafNodesOnly);
+		loadCSfromURL(values, CSurl, leafNodesOnly, async);
+	else loadCSfromFile(values, CSfilename, leafNodesOnly, async);
 };
+
+
+/**
+ * loads classification scheme values from either a local file or an URL based location and return them
+ * as an array
+ *        
+ * @param {boolean} useURL        if true use the URL loading method else use the local file
+ * @param {String} CSfilename     the filename of the classification scheme
+ * @param {String} CSurl          URL to the classification scheme
+ * @param {boolean} leafNodesOnly flag to indicate if only the leaf <term> values are to be loaded 
+ * @returns {Array} The linear list of values within the classification scheme
+ */
+ module.exports.loadCSx = function (useURL, CSfilename, CSurl, leafNodesOnly=false) {
+	var values=[];
+	if (useURL)
+		loadCSfromURL(values, CSurl, leafNodesOnly, false);
+	else loadCSfromFile(values, CSfilename, leafNodesOnly, false);
+	return values;
+};
+ 
+
 //--------------------------------------------------------------- 

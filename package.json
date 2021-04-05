@@ -1,10 +1,11 @@
 {
-	"name": "DVB-Common",
+	"name": "dvb-common",
 	"description": "Common functons for DVB applications",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"private": true,
 	"dependencies": {
 		"libxmljs2": "^0.26.7",
-		"node-fetch": "^2.6.1"
+		"node-fetch": "^2.6.1",
+		"sync-fetch": "^0.3.0"
 	}
 }
