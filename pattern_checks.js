@@ -36,7 +36,7 @@ module.exports.isUTCDateTime = function (str) {
  * see RFC 3986 - https://tools.ietf.org/html/rfc3986
  */
 module.exports.isHTTPURL=function (arg) {
-	return this.isURI(arg, '(https?:\\/\\/)');
+	return this.isURI(arg.trim(), '(https?:\\/\\/)');
 };
 
 
