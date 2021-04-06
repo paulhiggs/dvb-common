@@ -37,7 +37,7 @@ module.exports.xPathM = function (SCHEMA_PREFIX, elementNames) {
  * @param {String} value The value to check for existance
  * @return {boolean} if value is in the set of values
  */
-function isIn(values, value, caseSensitive=true){
+module.exports.isIn = function(values, value, caseSensitive=true){
 	let vlc=value.toLowerCase();
     if (typeof(values)=="string")
         return caseSensitive? values==value : values.toLowerCase()==vlc;
@@ -46,7 +46,7 @@ function isIn(values, value, caseSensitive=true){
 		return caseSensitive? values.includes(value) : (values.find(element => element.toLowerCase()==vlc) != undefined);
     
     return false;
-}
+};
 
 
 /**
@@ -56,6 +56,17 @@ function isIn(values, value, caseSensitive=true){
  * @param {String} value The value to check for existance
  * @return {boolean} if value is in the set of values
  */
-function isIni(values, value){
+module.exports.isIni = function(values, value){
 	return isIn(values, value, false);
-}
+};
+
+
+/**
+ * replace ENTITY strings with a generic characterSet
+ *
+ * @param {string} str string containing HTML or XML entities (starts with & ends with ;)
+ * @return {string} the string with entities replaced with a single character '*'
+ */
+module.exports.unEntity = function(str) {
+	return str.replace(/(&.+;)/ig, "*");
+};
