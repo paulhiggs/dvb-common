@@ -36,7 +36,7 @@ module.exports = class Role {
 		fetch(rolesURL)
 			.then(handleErrors)
 			.then(response => response.text())
-			.then(roles => roles.split('\n').forEach(e=>{this.values.push(e);}))
+			.then(roles => roles.split('\n').forEach(e=>{this.values.push(e.trim());}))
 			.catch(error => console.log(`error (${error}) retrieving ${rolesURL}`));
     }
 
@@ -50,7 +50,7 @@ module.exports = class Role {
 
         fs.readFile(rolesFile, {encoding: "utf-8"}, (err, data)=> {
             if (!err) {
-                data.split('\n').forEach(e=>{this.values.push(e);});
+                data.split('\n').forEach(e=>{this.values.push(e.trim());});
             }
             else console.log(err);
         });
