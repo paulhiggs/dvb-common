@@ -11,7 +11,6 @@ const fetch=require('node-fetch');
 module.exports = class Role {
     constructor () {
         this.values=[];
-        addRoles.bind(this);
     }
 
     count() {
@@ -32,8 +31,7 @@ module.exports = class Role {
 			}
 			return response;
 		}
-		console.log(`retrieving Roles from ${csURL} via fetch()`);
-        let vals=[];
+		console.log(`retrieving Roles from ${rolesURL} via fetch()`);
 
 		fetch(rolesURL)
 			.then(handleErrors)
@@ -71,8 +69,8 @@ module.exports = class Role {
      */
     loadRoles(useURL, CSfilename, CSurl){
         if (useURL)
-		    this.loadFromURL(CSurl, leafNodesOnly);
-	    else this.loadFromFile(CSfilename, leafNodesOnly);
+		    this.loadFromURL(CSurl);
+	    else this.loadFromFile(CSfilename);
     }
 
 
