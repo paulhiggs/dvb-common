@@ -3,6 +3,8 @@
 const fetch=require('node-fetch');
 const fs=require('fs');
 
+const {isIn, isIni}=require('./utils.js');
+
 class IANAlanguages {
 
 	constructor() {
@@ -29,23 +31,6 @@ class IANAlanguages {
 	 */
 	/* private function */
 	loadLanguages(languageData) {
-		
-		/**
-		 * determines if a value is in a set of values 
-		 *
-		 * @param {String or Array} values The set of values to check existance in
-		 * @param {String} value The value to check for existance
-		 * @return {boolean} if value is in the set of values
-		 */
-		function isIn(values, value){
-			if (typeof(values)=="string" || values instanceof String)
-				return values==value;
-		   
-			if (Array.isArray(values)) 	
-				return values.includes(value);
-			
-			return false;
-		}	
 
 		/**
 		 * determines if provided language information relates to a sign language 
@@ -149,16 +134,14 @@ class IANAlanguages {
 	 * @param {String} value The value to check for existance
 	 * @return {integer} indicating the "known" state of the language
 	 */
-	isKnown(value){
-		let lcValue=value.toLowerCase();
-		
+	isKnown(value) {
 		if (this.languageRanges.find(range => range.start<=value && value<=range.end))
 			return this.languageKnown;
-		
-		if (this.languagesList.find(lang => lang.toLowerCase()==lcValue))
+
+		if (isIni(this.languagesList, value))
 			return this.languageKnown;
 
-		if (this.redundantLanguagesList.find(lang => lang.toLowerCase()==lcValue))
+		if (isIni(this.redundantLanguagesList, value))
 			return this.languageRedundant;		
 
 		return this.languageUnknown;

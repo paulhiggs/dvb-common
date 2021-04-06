@@ -84,15 +84,12 @@ module.exports = class ClassificationScheme {
 			}
 			return response;
 		}
-		console.log(`retrieving CS from ${csURL} via fetch()`);
-        let vals=[];
+		console.log(`retrieving CS from ${csURL} via fetch()`); 
 		fetch(csURL)
 			.then(handleErrors)
 			.then(response => response.text())
 			.then(strXML => loadClassificationScheme(libxml.parseXmlString(strXML), leafNodesOnly).forEach(e=>{this.values.push(e);}))
 			.catch(error => console.log(`error (${error}) retrieving ${csURL}`));
-
-        this.values=vals.splice();
     }
 
     /**
