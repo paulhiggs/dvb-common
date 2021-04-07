@@ -6,19 +6,18 @@
 module.exports = class ErrorList {
       
     constructor() {
-        this.counts=[]; 
-        this.messages=[]; 
+        this.countsErr=[]; 
         this.countsWarn=[]; 
-        this.messagesWarn=[];
-        this.delim='#';
+        this.errors=[];
+        this.warnings=[];
     }
     increment(key) {
-        if (this.counts[key]===undefined)
+        if (this.countsErr[key]===undefined)
             this.set(key,1);
-        else this.counts[key]++;
+        else this.countsErr[key]++;
     }
     set(key,value) {
-        this.counts[key]=value;
+        this.countsErr[key]=value;
     }
     incrementW(key) {
         if (this.countsWarn[key]===undefined)
@@ -28,22 +27,33 @@ module.exports = class ErrorList {
     setW(key,value) {
         this.countsWarn[key]=value;
     }
-    push(message, key=null) {
-        this.messages.push(message);
+    push(errMessage, key=null) {
+        this.errors.push({code:null, message:errMessage, element:null});
 		if (key) this.increment(key);
     }
-	pushCode(errno, message, key=null) {
-        this.messages.push(errno+this.delim+message);
+	pushCode(errNo, errMessage, key=null) {
+        this.errors.push({code:errNo, message:errMessage, element:null});
 		if (key) this.increment(key);
-    }    
-	pushW(message, key=null) {
-        this.messagesWarn.push(message);
+    }
+	pushCodeWithFragment(errNo, errMessage, fragment, key=null) {
+        this.errors.push({code:errNo, message:errMessage, element:fragment});
+		if (key) this.increment(key);
+    }
+	pushW(errMessage, key=null) {
+        this.warnings.push({code:null, message:errMessage, element:null});
 		if (key) this.incrementW(key);
     }
-	pushCodeW(errno, message, key=null) {
-        this.messagesWarn.push(errno+this.delim+message);
+	pushCodeW(errNo, errMessage, key=null) {
+        this.warnings.push({code:errNo, message:errMessage, element:null});
 		if (key) this.increment(key);
     }
-    numErrors() { return this.messages.length; }
-    numWarnings() { return this.messagesWarn.length; }
+    pushCodeWWithFragment(errNo, errMessage, fragment, key=null) {
+        this.warnings.push({code:errNo, message:errMessage, element:fragment});
+		if (key) this.increment(key);
+    }
+    numErrors() { return this.errors.length; }
+    numWarnings() { return this.warnings.length; }
+
+    numCountsErr() { return this.countsErr.length; }
+    numCountsWarn() { return this.countsWarn.length; }
  };
