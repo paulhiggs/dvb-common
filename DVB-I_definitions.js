@@ -192,6 +192,7 @@ module.exports = Object.freeze({
 	a_verticalSize: "verticalSize",
 	a_visible: "visible",
 
+	e_AdditionalServiceParameters: "AdditionalServiceParameters", 
 	e_AudioConformancePoint: "AudioConformancePoint",
 	e_Availability: "Availability",
 	e_CASystemId: "CASystemId",

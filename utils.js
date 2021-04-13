@@ -8,9 +8,7 @@
  * @param {int} index              The instance of the named element to be searched for (if specified)
  * @returns {string} the XPath selector
  */
- module.exports.xPath = function (SCHEMA_PREFIX, elementName, index=null) {
-	return `${SCHEMA_PREFIX}:${elementName}${index?`[${index}]`:""}`;
-};
+ module.exports.xPath = (SCHEMA_PREFIX, elementName, index=null) => `${SCHEMA_PREFIX}:${elementName}${index?`[${index}]`:""}`;
 
 
 /**
@@ -48,9 +46,7 @@ module.exports.xPathM = function (SCHEMA_PREFIX, elementNames) {
  * @param {String} value The value to check for existance
  * @return {boolean} if value is in the set of values
  */
-module.exports.isIn = function(values, value, caseSensitive=true){
-	return findInSet(values, value, caseSensitive);
-};
+module.exports.isIn = (values, value, caseSensitive=true) =>  findInSet(values, value, caseSensitive);
 
 
 /**
@@ -60,9 +56,7 @@ module.exports.isIn = function(values, value, caseSensitive=true){
  * @param {String} value The value to check for existance
  * @return {boolean} if value is in the set of values
  */
-module.exports.isIni = function(values, value){
-	return findInSet(values, value, false);
-};
+module.exports.isIni = (values, value) => findInSet(values, value, false);
 
 
 /**
@@ -71,9 +65,7 @@ module.exports.isIni = function(values, value){
  * @param {string} str string containing HTML or XML entities (starts with & ends with ;)
  * @return {string} the string with entities replaced with a single character '*'
  */
-module.exports.unEntity = function(str) {
-	return str.replace(/(&.+;)/ig, "*");
-};
+module.exports.unEntity = (str) => str.replace(/(&.+;)/ig, "*");
 
 
 
