@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
 /**
- * Manages Classification Scheme checking
+ * Manages Classification Scheme loading and checking
  * 
  */
-const { throws } = require("assert");
+const {throws}=require("assert");
 const fs=require('fs');
 const libxml=require('libxmljs2');
 const fetch=require('node-fetch');
@@ -16,10 +16,7 @@ const fetch=require('node-fetch');
  * @param {string} childElementName the name of the child element to look for
  *& @returns {boolean} true of the element contains the named child element(s) otherwise false
  */
- function hasChild(elem, childElementName) {
-	if (!elem) return false;
-	return elem.childNodes().find(el => el.type()=='element' && el.name()==childElementName) != undefined;
-}
+hasChild = (elem, childElementName) => elem ? elem.childNodes().find(el => el.type()=='element' && el.name()==childElementName) != undefined : false;
 
 
 /**
@@ -59,7 +56,9 @@ function loadClassificationScheme(xmlCS, leafNodesOnly=false) {
     return vals;
 }
 
+
 module.exports = class ClassificationScheme {
+
     constructor () {
         this.values=[];
         loadClassificationScheme.bind(this);
@@ -69,6 +68,9 @@ module.exports = class ClassificationScheme {
         return this.values.length;
     }
 
+    empty() {
+        this.values=[];
+    }
     
     /**
      * read a classification scheme from a URL and load its hierarical values into a linear list 
@@ -111,7 +113,6 @@ module.exports = class ClassificationScheme {
 
     }
 
-
     /**
      * loads classification scheme values from either a local file or an URL based location and return them
      * as an array
@@ -126,7 +127,6 @@ module.exports = class ClassificationScheme {
 		    this.loadFromURL(CSurl, leafNodesOnly);
 	    else this.loadFromFile(CSfilename, leafNodesOnly);
     }
-
 
     /**
      * determines if the value is in the classification scheme
