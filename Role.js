@@ -17,6 +17,9 @@ module.exports = class Role {
         return this.values.length;
     }
 
+    empty() {
+        this.values=[];
+    }
     
     /**
      * read a classification scheme from a URL and load its hierarical values into a linear list 
@@ -54,10 +57,7 @@ module.exports = class Role {
             }
             else console.log(err);
         });
-
-
     }
-
 
     /**
      * loads classification scheme values from either a local file or an URL based location and return them
@@ -72,7 +72,6 @@ module.exports = class Role {
 		    this.loadFromURL(CSurl);
 	    else this.loadFromFile(CSfilename);
     }
-
 
     /**
      * determines if the value is in the classification scheme
