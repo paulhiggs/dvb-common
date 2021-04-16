@@ -6,26 +6,28 @@
 module.exports = class ErrorList {
       
     constructor() {
-        this.countsErr=[]; 
-        this.countsWarn=[]; 
+        this.countsErr=[]; this.numCountsE=0;   // keep these counters as arrays constructed by 
+        this.countsWarn=[]; this.numCountsW=0;   // direct insertion do not maintain them
         this.errors=[];
         this.warnings=[];
     }
     increment(key) {
         if (this.countsErr[key]===undefined)
-            this.set(key,1);
+            this.set(key);
         else this.countsErr[key]++;
     }
-    set(key,value) {
+    set(key,value=1) {
         this.countsErr[key]=value;
+        this.numCountsE++;
     }
     incrementW(key) {
         if (this.countsWarn[key]===undefined)
-            this.setW(key,1);
+            this.setW(key);
         else this.countsWarn[key]++;
-    }
-    setW(key,value) {
+     }
+    setW(key,value=1) {
         this.countsWarn[key]=value;
+        this.numCountsW++;
     }
     push(errMessage, key=null) {
         this.errors.push({code:null, message:errMessage, element:null});
@@ -45,15 +47,15 @@ module.exports = class ErrorList {
     }
 	pushCodeW(errNo, errMessage, key=null) {
         this.warnings.push({code:errNo, message:errMessage, element:null});
-		if (key) this.increment(key);
+		if (key) this.incrementW(key);
     }
     pushCodeWWithFragment(errNo, errMessage, fragment, key=null) {
         this.warnings.push({code:errNo, message:errMessage, element:fragment});
-		if (key) this.increment(key);
+		if (key) this.incrementW(key);
     }
     numErrors() { return this.errors.length; }
     numWarnings() { return this.warnings.length; }
 
-    numCountsErr() { return this.countsErr.length; }
-    numCountsWarn() { return this.countsWarn.length; }
+    numCountsErr() { return this.numCountsE; }
+    numCountsWarn() { return this.numCountsW; }
  };
