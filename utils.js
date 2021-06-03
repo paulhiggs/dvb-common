@@ -31,13 +31,14 @@ module.exports.xPathM = function (SCHEMA_PREFIX, elementNames) {
 /* local */ function findInSet(values, value, caseSensitive) {
 	let vlc=value.toLowerCase();
     if (typeof(values)=="string")
-        return caseSensitive? values==value : values.toLowerCase()==vlc;
+        return caseSensitive ? values==value : values.toLowerCase()==vlc;
 
-    if (typeof(values)=="object")
-		return caseSensitive? values.includes(value) : (values.find(element => element.toLowerCase()==vlc) != undefined);
+    if ((values instanceof Array) || typeof(values)=="object")
+		return caseSensitive ? values.includes(value) : (values.find(element => element.toLowerCase()==vlc) != undefined);
 
     return false;
 }
+
 
 /**
  * determines if a value is in a set of values 
@@ -66,8 +67,6 @@ module.exports.isIni = (values, value) => findInSet(values, value, false);
  * @return {string} the string with entities replaced with a single character '*'
  */
 module.exports.unEntity = (str) => str.replace(/(&.+;)/ig, "*");
-
-
 
 
 // credit to https://gist.github.com/adriengibrat/e0b6d16cdd8c584392d8#file-parseduration-es5-js
